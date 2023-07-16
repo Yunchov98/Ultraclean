@@ -7,20 +7,32 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { MainComponent } from './main/main.component';
+import { UserModule } from './user/user.module';
+import { UltracleanServicesComponent } from './ultraclean-services/ultraclean-services.component';
+import { JoinUsComponent } from './join-us/join-us.component';
+import { BookingFormComponent } from './booking-form/booking-form.component';
+import { ContactsComponent } from './contacts/contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    MainComponent,
+    UltracleanServicesComponent,
+    JoinUsComponent,
+    BookingFormComponent,
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    UserModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
