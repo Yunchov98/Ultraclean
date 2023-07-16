@@ -1,0 +1,11 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 
+.wrapper {
+    width:100vh;
+    height: 100%;
+    padding-bottom: 80px;
+} */

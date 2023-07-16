@@ -1,0 +1,111 @@
+<div class="bg-white opacity-90 w-fit mx-auto p-10 mt-8 rounded-2xl">
+  <span class="flex cursor-pointer w-fit">X</span>
+  <span class="flex justify-center font-bold text-xl lg:text-3xl">Job Application</span>
+  <div class="mt-5">
+    <form>
+      <div class="flex flex-col md:grid md:grid-cols-2 space-x-3">
+        <div class="flex flex-col">
+          <label class="flex justify-start text-sm md:text-lg mt-1" for="firstName">First Name*</label>
+          <!-- <p>Error</p> -->
+          <input
+            class="border-2 border-slate-700 text-sm md:text-xl mt-1"
+            type="text"
+            name="firstName"
+            id="firstName"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label class="flex justify-start text-sm md:text-lg mt-1" for="lastName">Last Name*</label>
+          <!-- <p>Error</p> -->
+          <input
+            class="border-2 border-slate-700 text-sm md:text-xl mt-1"
+            type="text"
+            name="lastName"
+            id="lastName"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col mt-2">
+        <label for="email">Email*</label>
+        <!-- <p>Error</p> -->
+        <input
+          type="text"
+          name="email"
+          id="email"
+          class="border-2 border-slate-700"
+        />
+      </div>
+      <div class="flex flex-col mt-2">
+        <label for="portfolio">Portfolio</label>
+        <!-- <p>Error</p> -->
+        <input
+          type="text"
+          name="portfolio"
+          id="portfolio"
+          class="border-2 border-slate-700"
+          placeholder="http://"
+        />
+      </div>
+      <div class="flex flex-col md:grid md:grid-cols-2 space-x-3 mt-2">
+        <div class="flex flex-col">
+          <label class="flex justify-start" for="salary"
+            >Salary requirements</label
+          >
+          <!-- <p>Error</p> -->
+          <input
+            class="border-2 border-slate-700 mt-1"
+            type="number"
+            name="salary"
+            id="salary"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label class="flex justify-start" for="startDate"
+            >When can you start?</label
+          >
+          <!-- <p>Error</p> -->
+          <input
+            class="border-2 border-slate-700 mt-1"
+            type="date"
+            name="startDate"
+            id="startDate"
+          />
+        </div>
+      </div>
+      <div class="flex flex-col mt-2">
+        <label for="lastCompany">Last company you worked for</label>
+        <!-- <p>Error</p> -->
+        <input
+          type="text"
+          name="lastCompany"
+          id="lastCompany"
+          class="border-2 border-slate-700"
+        />
+      </div>
+      <div class="flex flex-col mt-2">
+        <label for="comments">Reference / Comments / Questions</label>
+        <!-- <p>Error</p> -->
+        <textarea
+          name="comments"
+          id="comments"
+          cols="20"
+          rows="8"
+          class="border-2 border-slate-700"
+        ></textarea>
+      </div>
+      <div class="bg-black p-2 text-white">
+        <div class="flex justify-center space-x-4 mt-2">
+          <label for="check">I am not robot</label>
+          <input type="checkbox" name="check" id="check" />
+        </div>
+        <div class="flex justify-center mt-2">
+          <input
+            type="submit"
+            value="Submit"
+            class="uppercase border-1 bg-green-700 rounded-full pr-4 pl-4 pt-1 pb-1"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
