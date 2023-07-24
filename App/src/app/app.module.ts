@@ -13,6 +13,8 @@ import { UltracleanServicesComponent } from './ultraclean-services/ultraclean-se
 import { JoinUsComponent } from './join-us/join-us.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { HttpClientModule } from '@angular/common/http';
+import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { ContactsComponent } from './contacts/contacts.component';
     JoinUsComponent,
     BookingFormComponent,
     ContactsComponent,
+    CleaningRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { ContactsComponent } from './contacts/contacts.component';
     CoreModule,
     SharedModule,
     UserModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
