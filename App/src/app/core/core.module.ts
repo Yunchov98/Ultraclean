@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserHeaderComponent } from './header/user-header/user-header.component';
 import { AdminHeaderComponent } from './header/admin-header/admin-header.component';
-import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,7 @@ import { RouterModule } from '@angular/router';
     UserHeaderComponent,
     AdminHeaderComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, SharedModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}
