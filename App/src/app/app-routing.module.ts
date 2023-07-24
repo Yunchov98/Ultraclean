@@ -7,6 +7,7 @@ import { UltracleanServicesComponent } from './ultraclean-services/ultraclean-se
 import { JoinUsComponent } from './join-us/join-us.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'contacts',
     component: ContactsComponent,
+  },
+  {
+    path: 'cleaning-requests',
+    component: CleaningRequestsComponent,
   },
 ];
 
