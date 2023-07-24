@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         chelaOne: ['Chela One'],
         staatliches: ['Staatliches'],
+        kalam: ['Kalam'],
       },
     },
   },

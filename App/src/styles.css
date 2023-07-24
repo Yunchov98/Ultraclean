@@ -1,6 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Chela+One&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    overflow-x: hidden;
+    background-color: rgb(243 244 246)
+    /* background-color: white; */
+}
