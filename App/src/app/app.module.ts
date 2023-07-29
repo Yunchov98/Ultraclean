@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
+import { AddServiceComponent } from './add-service/add-service.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests
     BookingFormComponent,
     ContactsComponent,
     CleaningRequestsComponent,
+    AddServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,7 @@ import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests
     SharedModule,
     UserModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
