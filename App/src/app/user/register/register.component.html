@@ -2,19 +2,90 @@
   <div class="registration form">
     <header>Sign Up</header>
     <form>
-      <input type="text" placeholder="Enter your email" />
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Enter your password"
-      />
-      <input
-        type="password"
-        name="repeatPassword"
-        id="repeatPassword"
-        placeholder="Confirm password"
-      />
+      <div>
+        <label for="email"></label>
+        <input
+          type="text"
+          name="email"
+          placeholder="Enter your email"
+          ngModel
+          #emailInput="ngModel"
+          required
+          minlength="6"
+          maxlength="30"
+          pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+        />
+
+        <ng-container *ngIf="emailInput.touched || emailInput.invalid">
+          <p class="text-red-600" *ngIf="emailInput.errors?.['required']">
+            Email is required!
+          </p>
+          <p class="text-red-600" *ngIf="emailInput.errors?.['minlength']">
+            Email must be at least 10 characters long.
+          </p>
+          <p class="text-red-600" *ngIf="emailInput.errors?.['maxlength']">
+            Email cannot be longer than 30 characters
+          </p>
+          <p class="text-red-600" *ngIf="emailInput.errors?.['pattern']">
+            Invalid Email Adress!
+          </p>
+        </ng-container>
+      </div>
+      <div>
+        <label for="password"></label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+          ngModel
+          #passwordInput="ngModel"
+          required
+          minlength="8"
+          maxlength="20"
+        />
+
+        <ng-container *ngIf="passwordInput.touched || passwordInput.invalid">
+          <p class="text-red-600" *ngIf="passwordInput.errors?.['required']">
+            Password is required!
+          </p>
+          <p class="text-red-600" *ngIf="passwordInput.errors?.['minlength']">
+            Password must be at least 8 characters long.
+          </p>
+          <p class="text-red-600" *ngIf="passwordInput.errors?.['maxlength']">
+            Password cannot be longer than 20 characters
+          </p>
+        </ng-container>
+      </div>
+      <div>
+        <label for="repeatPassword"></label>
+        <input
+          type="password"
+          name="repeatPassword"
+          id="repeatPassword"
+          placeholder="Confirm password"
+          ngModel
+          #repeatPasswordInput="ngModel"
+          required
+        />
+
+        <ng-container
+          *ngIf="repeatPasswordInput.touched || repeatPasswordInput.invalid"
+        >
+          <p
+            class="text-red-600"
+            *ngIf="repeatPasswordInput.errors?.['required']"
+          >
+            Repeat Password is required!
+          </p>
+          <p
+            class="text-red-600"
+            *ngIf="passwordInput.value !== repeatPasswordInput.value"
+          >
+            Passwords don't match!
+          </p>
+        </ng-container>
+      </div>
       <input type="button" value="Sign Up" class="button" />
     </form>
     <div class="signup">
