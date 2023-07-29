@@ -1,0 +1,107 @@
+<div class="bg-white opacity-90 w-fit mx-auto p-10 mt-8 rounded-2xl">
+  <app-cancel-button />
+  <div class="mt-6 flex justify-center">
+    <h2 class="uppercase font-bold text-xs md:text-lg lg:text-3xl">
+      Add Service
+    </h2>
+  </div>
+  <div class="mt-5">
+    <form #form="ngForm" (ngSubmit)="addServiceHandler(form)">
+      <div class="flex flex-col">
+        <label for="service"></label>
+        <input
+          type="text"
+          name="service"
+          id="service"
+          placeholder="Service name"
+          class="border-2 border-slate-700 text-sm md:text-xl mt-1 rounded-xl"
+          ngModel
+          #serviceInput="ngModel"
+          required
+          minlength="4"
+        />
+
+        <ng-container *ngIf="serviceInput.touched">
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['required']">
+            Service name is required!
+          </p>
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['minlength']">
+            Service name must be at least 4 characters long.
+          </p>
+        </ng-container>
+      </div>
+
+      <div class="flex flex-col">
+        <label for="imageUrl"></label>
+        <input
+          type="text"
+          name="imageUrl"
+          id="imageUrl"
+          placeholder="Image URL"
+          class="border-2 border-slate-700 text-sm md:text-xl mt-1 rounded-xl"
+          ngModel
+          #imageInput="ngModel"
+          required
+          minlength="6"
+        />
+
+        <ng-container *ngIf="imageInput.touched">
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['required']">
+            Image URL is required!
+          </p>
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['minlength']">
+            Image URL must be at least 4 characters long.
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex flex-col">
+        <label for="price"></label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          placeholder="Price $"
+          class="border-2 border-slate-700 text-sm md:text-xl mt-1 rounded-xl"
+          ngModel
+          #priceInput="ngModel"
+          required
+        />
+
+        <ng-container *ngIf="priceInput.touched">
+          <p class="text-red-600" *ngIf="priceInput.errors?.['required']">
+            Price is required!
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex flex-col mt-4">
+        <label for="description"></label>
+        <textarea
+          name="description"
+          placeholder="Description..."
+          id="description"
+          class="border-2 border-slate-700 text-sm md:text-xl mt-1 rounded-xl"
+          ngModel
+          #descriptionArea="ngModel"
+          required
+          minlength="10"
+        ></textarea>
+
+        <ng-container *ngIf="descriptionArea.touched">
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['required']">
+            Description is required!
+          </p>
+          <p class="text-red-600" *ngIf="serviceInput.errors?.['minlength']">
+            Description must be at least 10 characters long.
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex justify-center mt-8">
+        <button
+          class="border-2 rounded-xl pl-2 pr-2 pt-1 pb-1 text-white bg-green-700 hover:bg-green-800"
+        >
+          Add Service
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
