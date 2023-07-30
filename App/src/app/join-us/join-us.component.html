@@ -1,39 +1,89 @@
 <div class="bg-white opacity-90 w-fit mx-auto p-10 mt-8 rounded-2xl">
-  <app-cancel-button /> 
-  <span class="flex justify-center font-bold text-xl lg:text-3xl">Job Application</span>
+  <app-cancel-button />
+  <span class="flex justify-center font-bold text-xl lg:text-3xl"
+    >Job Application</span
+  >
   <div class="mt-5">
-    <form>
+    <form #form="ngForm" (ngSubmit)="submitHandler(form)">
       <div class="flex flex-col md:grid md:grid-cols-2 space-x-3">
         <div class="flex flex-col">
-          <label class="flex justify-start text-sm md:text-lg mt-1" for="firstName">First Name*</label>
-          <!-- <p>Error</p> -->
+          <label
+            class="flex justify-start text-sm md:text-lg mt-1"
+            for="firstName"
+            >First Name*</label
+          >
           <input
             class="border-2 border-slate-700 text-sm md:text-xl mt-1"
             type="text"
             name="firstName"
             id="firstName"
+            ngModel
+            #firstNameInput="ngModel"
+            required
+            minlength="2"
           />
+          <ng-container *ngIf="firstNameInput.touched">
+            <p class="text-red-600" *ngIf="firstNameInput.errors?.['required']">
+              First name is required!
+            </p>
+            <p
+              class="text-red-600"
+              *ngIf="firstNameInput.errors?.['minlength']"
+            >
+              First name must be at least 2 characters long!
+            </p>
+          </ng-container>
         </div>
         <div class="flex flex-col">
-          <label class="flex justify-start text-sm md:text-lg mt-1" for="lastName">Last Name*</label>
-          <!-- <p>Error</p> -->
+          <label
+            class="flex justify-start text-sm md:text-lg mt-1"
+            for="lastName"
+            >Last Name*</label
+          >
           <input
             class="border-2 border-slate-700 text-sm md:text-xl mt-1"
             type="text"
             name="lastName"
             id="lastName"
+            ngModel
+            #lastNameInput="ngModel"
+            required
+            minlength="2"
           />
+          <ng-container *ngIf="lastNameInput.touched">
+            <p class="text-red-600" *ngIf="lastNameInput.errors?.['required']">
+              Last name is required!
+            </p>
+            <p class="text-red-600" *ngIf="lastNameInput.errors?.['minlength']">
+              Last name must be at least 2 characters long!
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="flex flex-col mt-2">
         <label for="email">Email*</label>
-        <!-- <p>Error</p> -->
         <input
           type="text"
           name="email"
           id="email"
           class="border-2 border-slate-700"
+          ngModel
+          #emailInput="ngModel"
+          required
+          minlength="6"
+          maxlength="30"
         />
+        <ng-container *ngIf="emailInput.touched">
+          <p class="text-red-600" *ngIf="emailInput.errors?.['required']">
+            Email adress is required!
+          </p>
+          <p class="text-red-600" *ngIf="emailInput.errors?.['minlength']">
+            Email adress must be at least 6 characters long!
+          </p>
+          <p class="text-red-600" *ngIf="emailInput.errors?.['maxlength']">
+            Email adress cannot be longer than 30 characters!
+          </p>
+        </ng-container>
       </div>
       <div class="flex flex-col mt-2">
         <label for="portfolio">Portfolio</label>
@@ -99,11 +149,11 @@
           <input type="checkbox" name="check" id="check" />
         </div>
         <div class="flex justify-center mt-2">
-          <input
-            type="submit"
-            value="Submit"
-            class="uppercase border-1 bg-green-700 rounded-full pr-4 pl-4 pt-1 pb-1"
-          />
+          <button
+            class="uppercase border-1 bg-green-700 hover:bg-green-800 rounded-full pr-4 pl-4 pt-1 pb-1"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </form>
