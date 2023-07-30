@@ -8,6 +8,8 @@ import { JoinUsComponent } from './join-us/join-us.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
+import { AddServiceComponent } from './add-service/add-service.component';
+import { JobRequestsComponent } from './job-requests/job-requests.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,14 @@ const routes: Routes = [
   {
     path: 'cleaning-requests',
     component: CleaningRequestsComponent,
+  },
+  {
+    path: 'add-service',
+    component: AddServiceComponent,
+  },
+  {
+    path: 'job-requests',
+    component: JobRequestsComponent,
   },
 ];
 
