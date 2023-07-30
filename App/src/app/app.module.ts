@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +18,11 @@ import { UltracleanServicesComponent } from './ultraclean-services/ultraclean-se
 import { JoinUsComponent } from './join-us/join-us.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { HttpClientModule } from '@angular/common/http';
 import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
 import { AddServiceComponent } from './add-service/add-service.component';
+import { environment } from '../environments/environment';
+import { JobRequestsComponent } from './job-requests/job-requests.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +36,7 @@ import { AddServiceComponent } from './add-service/add-service.component';
     ContactsComponent,
     CleaningRequestsComponent,
     AddServiceComponent,
+    JobRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +46,9 @@ import { AddServiceComponent } from './add-service/add-service.component';
     UserModule,
     HttpClientModule,
     FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent],
