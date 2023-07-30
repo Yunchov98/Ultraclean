@@ -13,3 +13,9 @@ body {
     background-color: rgb(243 244 246)
     /* background-color: white; */
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
