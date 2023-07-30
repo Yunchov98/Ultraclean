@@ -6,7 +6,7 @@
     booking form
   </div>
   <div class="mt-8">
-    <form>
+    <form #bookingForm="ngForm">
       <div class="grid grid-cols-2 space-x-3">
         <div class="flex flex-col">
           <label for="name" class="flex justify-start ml-2 text-sm md:text-xl"
@@ -16,7 +16,23 @@
             type="text"
             name="name"
             class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
+            ngModel
+            #nameInput="ngModel"
+            required
+            minlength="1"
+            pattern="^[a-zA-Z]+"
           />
+          <ng-container *ngIf="nameInput.touched">
+            <p class="text-red-600" *ngIf="nameInput.errors?.['required']">
+              Name is required!
+            </p>
+            <p class="text-red-600" *ngIf="nameInput.errors?.['minlength']">
+              Name must be at least 1 characters long.
+            </p>
+            <p class="text-red-600" *ngIf="nameInput.errors?.['pattern']">
+              The name may contain only Latin letters (Example: John)
+            </p>
+          </ng-container>
         </div>
         <div class="flex flex-col">
           <label for="email" class="flex justify-start ml-2 text-sm md:text-xl"
@@ -26,7 +42,24 @@
             type="text"
             name="email"
             class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
+            ngModel
+            #emailInput="ngModel"
+            required
+            minlength="6"
+            maxlength="30"
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
           />
+          <ng-container *ngIf="emailInput.touched">
+            <p class="text-red-600" *ngIf="emailInput.errors?.['required']">
+              Email is required!
+            </p>
+            <p class="text-red-600" *ngIf="emailInput.errors?.['minlength']">
+              Email must be at least 6 characters long.
+            </p>
+            <p class="text-red-600" *ngIf="emailInput.errors?.['pattern']">
+              Invalid email (Example: example@example.com)
+            </p>
+          </ng-container>
         </div>
       </div>
       <div class="flex flex-col mt-2">
@@ -34,10 +67,26 @@
           >Phone*</label
         >
         <input
-          type="tel"
+          type="number"
           name="phone"
           class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
+          ngModel
+          #phoneInput="ngModel"
+          required
+          minlength="10"
+          pattern="^[0-9 -]{10,}"
         />
+        <ng-container *ngIf="phoneInput.touched">
+          <p class="text-red-600" *ngIf="phoneInput.errors?.['required']">
+            Phone number is required!
+          </p>
+          <p class="text-red-600" *ngIf="phoneInput.errors?.['minlength']">
+            Phone number must be at least 10 digits long.
+          </p>
+          <p class="text-red-600" *ngIf="phoneInput.errors?.['pattern']">
+            Invalid phone number (Example: 1 2345 67890/1234567890/1-2345-67890)
+          </p>
+        </ng-container>
       </div>
       <div class="flex flex-col mt-2">
         <label for="address" class="flex justify-start ml-2 text-sm md:text-xl"
@@ -47,7 +96,23 @@
           type="tel"
           name="address"
           class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
+          ngModel
+          #addressInput="ngModel"
+          required
+          minlength="2"
+          pattern="^[a-zA-Z ]{2,}-[a-zA-Z0-9 ]{2,}"
         />
+        <ng-container *ngIf="addressInput.touched">
+          <p class="text-red-600" *ngIf="addressInput.errors?.['required']">
+            Address is required!
+          </p>
+          <p class="text-red-600" *ngIf="addressInput.errors?.['minlength']">
+            Address must be at least 2 digits long.
+          </p>
+          <p class="text-red-600" *ngIf="addressInput.errors?.['pattern']">
+            Address should be in format: City - Street number
+          </p>
+        </ng-container>
       </div>
       <div class="flex flex-col mt-2">
         <label for="town" class="flex justify-start ml-2 text-sm md:text-xl"
@@ -71,7 +136,10 @@
             class="border-2 text-sm md:text-xl w-fit pl-2 pr-2 pt-1 pb-1 rounded-full mt-2 mb-2 space-x-2 border-black"
           >
             <span>House Cleaning</span>
-            <span class="cursor-pointer text-gray-800 hover:text-black hover:rounded-full hover:bg-gray-300 pl-2 pr-2 pt-1 pb-1 hover:opacity-90">X</span>
+            <span
+              class="cursor-pointer text-gray-800 hover:text-black hover:rounded-full hover:bg-gray-300 pl-2 pr-2 pt-1 pb-1 hover:opacity-90"
+              >X</span
+            >
           </div>
         </div>
 
