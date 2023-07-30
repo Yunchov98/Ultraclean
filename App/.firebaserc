@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ultraclean-1f04b": {
+      "hosting": {
+        "App": [
+          "ultraclean-1f04b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ultraclean-1f04b"
+  }
+}
