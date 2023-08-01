@@ -11,11 +11,11 @@
   <div>
     <div
       *ngIf="isLoading === false"
-      class="flex flex-col text-sm space-x-4 items-center md:grid md:grid-cols-2 lg:grid-cols-3 space-y-4"
+      class="flex flex-col space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-3"
     >
       <div
         *ngFor="let data of requests"
-        class="space-y-3 border-2 border-black w-fit p-2 text-xs h-fit md:text-base lg:text-lg"
+        class="space-y-3 rounded-3xl mx-auto border-2 border-black w-11/12 h-fit p-2 text-sm md:text-base lg:text-lg"
       >
         <div class="mx-auto space-x-2 bg-slate-100 pl-2 pr-2 w-fit rounded-xl">
           <span class="">{{ data.firstName }}</span>
@@ -35,7 +35,7 @@
         <div class="bg-slate-400 mx-auto w-fit pl-2 pr-2 rounded-xl">
           <span>Comments: {{data.comments}}</span>
         </div>
-        <div class="flex justify-center space-x-5 mt-4">
+        <div class="flex justify-center space-x-5">
             <button class="bg-green-700 rounded-full font-bold pl-2 pr-2 pt-1 pb-1 text-black hover:bg-green-800">Accept</button>
             <button class="bg-red-700 rounded-full font-bold pl-2 pr-2 pt-1 pb-1 text-black hover:bg-red-800">Reject</button>
         </div>
