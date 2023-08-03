@@ -1,4 +1,5 @@
 <div
+  *ngIf="!isAdmin()"
   class="flex-col flex items-center mt-20 text-2xl md:text-5xl lg:text-7xl text-black bg-gray-200 opacity-90 w-full pb-2"
 >
   <h1 class="uppercase font-kalam mt-4">you deserve a clean home</h1>
@@ -11,7 +12,8 @@
 
 <!-- Admin's home page view  -->
 
- <!-- <div
+<div
+  *ngIf="isAdmin()"
   class="flex-col flex items-center mt-20 text-2xl md:text-5xl lg:text-7xl text-black bg-gray-200 opacity-90 w-full pb-2"
 >
   <h1 class="uppercase">be positive</h1>
@@ -20,4 +22,4 @@
   >
     keep smiling :)
   </div>
-</div> -->
+</div>
