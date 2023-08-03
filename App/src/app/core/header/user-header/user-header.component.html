@@ -10,7 +10,10 @@
   <span class="hidden cursor-default text-7xl font-staatliches lg:block"
     >ULTRACLEAN</span
   >
-  <div class="flex flex-col md:flex-row space-x-4 text-lg mr-20">
+  <div
+    *ngIf="!isLoggedIn"
+    class="flex flex-col md:flex-row space-x-4 text-lg mr-20"
+  >
     <span
       class="flex border-black justify-center mb-3 cursor-pointer rounded-full opacity-100 bg-green-700 md:pl-3 md:mb-0 md:pr-3 md:pt-1 md:pb-1 hover:text-white"
       ><a routerLink="/login">LogIn</a></span
@@ -19,6 +22,16 @@
       class="cursor-pointer hover:text-white hover:bg-green-700 rounded-full pl-3 pr-3 pt-1 pb-1"
       ><a routerLink="/register">Create Account</a></span
     >
+  </div>
+  <div
+    *ngIf="isLoggedIn"
+    class="flex flex-col md:flex-row space-x-4 text-lg mr-20"
+  >
+    <span
+      class="flex border-black justify-center mb-3 cursor-pointer rounded-full opacity-100 bg-green-700 md:pl-3 md:mb-0 md:pr-3 md:pt-1 md:pb-1 hover:text-white"
+      ><a routerLink="/profile">Profile</a></span
+    >
+    <app-logout />
   </div>
 </div>
 <div class="hidden md:flex justify-start space-x-8">
