@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ref, onValue, Database } from '@angular/fire/database';
-import { Service } from '../interfaces/service';
+import { Service } from '../interfaces/Service';
 
 @Component({
   selector: 'app-booking-form',
