@@ -1,6 +1,7 @@
 export interface Service {
-    service: string;
-    imageUrl: string;
-    price: number;
-    description: string;
+  _id: string;
+  service: string;
+  imageUrl: string;
+  price: number;
+  description: string;
 }
