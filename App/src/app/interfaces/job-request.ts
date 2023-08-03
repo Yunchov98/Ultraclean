@@ -1,4 +1,5 @@
 export interface JobRequest {
+  _id: string;
   comments: string;
   email: string;
   firstName: string;
