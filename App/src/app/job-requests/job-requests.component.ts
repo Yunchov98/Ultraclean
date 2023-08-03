@@ -1,28 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Database, onValue, ref } from '@angular/fire/database';
-import { JobRequest } from '../interfaces/job-request';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { JobRequest } from '../interfaces/Job-request';
+import { ApiService } from '../app-services/api.service';
 
 @Component({
   selector: 'app-job-requests',
   templateUrl: './job-requests.component.html',
   styleUrls: ['./job-requests.component.css'],
 })
-export class JobRequestsComponent implements OnInit {
-  constructor(private database: Database) {}
-
-  isLoading:boolean = true;
+export class JobRequestsComponent implements OnInit, OnDestroy {
+  isLoading: boolean = true;
   requests: JobRequest[] = [];
+  subscription$!: Subscription;
+
+  constructor(
+    private apiService: ApiService,
+  ) {}
 
   ngOnInit(): void {
-    const starCountRef = ref(this.database, 'job-requests/');
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
+    this.subscription$ = this.apiService
+      .getJobRequests()
+      .pipe(
+        map((req: JobRequest[]) => {
+          const requests: JobRequest[] = [];
+          for (const key in req) {
+            if (req.hasOwnProperty(key)) {
+              requests.push({ ...req[key], _id: key });
+            }
+          }
 
-      Object.keys(data).forEach((key) => {
-        this.requests.push(data[key]);
+          return requests;
+        })
+      )
+      .subscribe({
+        next: (requests: JobRequest[]) => {
+          this.requests = requests;
+          this.isLoading = false;
+        },
+        error: (error: Error) => console.log(`Error: ${error}`),
       });
+  }
 
-      this.isLoading = false;
-    });
+  ngOnDestroy(): void {
+    if (this.subscription$ !== undefined) {
+      this.subscription$.unsubscribe();
+    }
   }
 }
