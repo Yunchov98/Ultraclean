@@ -39,7 +39,7 @@
           </p>
         </div>
 
-        <div class="flex justify-center mt-4 space-x-2">
+        <div *ngIf="!isAdmin()" class="flex justify-center mt-4 space-x-2">
           <button
             class="border-2 rounded-full border-black p-2"
             (click)="toggle()"
@@ -51,6 +51,10 @@
             class="border-2 rounded-full border-black p-2"
             >Book Now</a
           >
+        </div>
+        <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-2">
+          <button class="border-2 rounded-2xl border-black p-2">Edit</button>
+          <button class="border-2 rounded-full border-black p-2 bg-red-500 text-white">Delete</button>
         </div>
       </div>
     </div>
