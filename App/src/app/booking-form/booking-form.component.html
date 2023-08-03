@@ -132,29 +132,33 @@
           >Services</label
         >
 
-        <div
+        <!-- <div
           class="flex flex-col items-center md:grid md:grid-cols-3 md:space-x-2"
         >
           <div
             *ngFor="let service of selectedServices"
             class="border-2 text-sm md:text-xl w-fit pl-2 pr-2 pt-1 pb-1 rounded-full mt-2 mb-2 space-x-2 border-black"
           >
-            <span>{{service}}</span>
+            <span>{{ service }}</span>
             <span
               class="cursor-pointer text-gray-800 hover:text-black hover:rounded-full hover:bg-gray-300 pl-2 pr-2 pt-1 pb-1 hover:opacity-90"
               >X</span
             >
           </div>
-        </div>
+        </div> -->
 
         <select
           name="services"
           id="services"
           class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
         >
-          <option *ngFor="let service of services" class="text-sm md:text-xl" value="service">{{service.service}}</option>
-          <!-- <option class="text-sm md:text-xl" value="">2</option>
-          <option class="text-sm md:text-xl" value="">3</option> -->
+          <option
+            *ngFor="let service of services"
+            class="text-sm md:text-xl"
+            value="service"
+          >
+            {{ service.service }}
+          </option>
         </select>
       </div>
       <div class="flex justify-center space-x-3 mt-4">
