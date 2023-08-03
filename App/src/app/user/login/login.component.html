@@ -1,7 +1,7 @@
 <div class="wrapper mt-20 lg:mt-40">
   <div class="login form">
     <header>Login</header>
-    <form #loginForm="ngForm">
+    <form #loginForm="ngForm" (ngSubmit)="loginHandler(loginForm)">
       <div>
         <label for="email"></label>
         <input
@@ -39,7 +39,10 @@
           </p>
         </ng-container>
       </div>
-      <input type="button" value="Log In" class="button" />
+      <div class="flex justify-center" *ngIf="errorMessage">
+        <p class="text-red-600">{{errorMessage}}</p>
+      </div>
+      <input type="submit" value="Log In" class="button" />
     </form>
     <div class="signup">
       <span class="signup"
