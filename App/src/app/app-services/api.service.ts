@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Service } from '../interfaces/Service';
 import { JobRequest } from '../interfaces/Job-request';
+import { ClearRequest } from '../interfaces/Clear-request';
 
 @Injectable({
   providedIn: 'root',
@@ -12,10 +13,10 @@ import { JobRequest } from '../interfaces/Job-request';
 export class ApiService {
   constructor(private http: HttpClient) {}
 
-  getBookingServices(): Observable<Service[]> {
+  getCleaningRequests(): Observable<Service[]> {
     const { firebase } = environment;
     return this.http.get<Service[]>(
-      `${firebase.databaseURL}/booking-services.json`
+      `${firebase.databaseURL}/ultraclean-services.json`
     );
   }
 
@@ -33,5 +34,11 @@ export class ApiService {
       `${firebase.databaseURL}/ultraclean-services.json`,
       data
     );
+  }
+
+  bookAService(data: ClearRequest): Observable<ClearRequest> {
+    const {firebase} = environment;
+
+    return this.http.post<ClearRequest>(`${firebase.databaseURL}`, data)
   }
 }
