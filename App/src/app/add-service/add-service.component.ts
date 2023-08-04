@@ -1,30 +1,58 @@
-import { Component } from '@angular/core';
-import { Database, ref, set } from '@angular/fire/database';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { ApiService } from '../app-services/api.service';
+import { AuthService } from '../app-services/auth.service';
+import { Service } from '../interfaces/Service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
   styleUrls: ['./add-service.component.css'],
 })
-export class AddServiceComponent {
-  constructor(private database: Database, private router: Router) {}
+export class AddServiceComponent implements OnDestroy {
+  subscription$!: Subscription;
+  errorMessage: string = '';
 
-  addServiceHandler(form: NgForm): void {
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  createServiceHandler(form: NgForm): void {
     if (form.invalid) {
       return;
     }
 
+    const adminId = this.authService.getUserData()?._id;
     const { service, imageUrl, price, description } = form.value;
 
-    set(ref(this.database, 'booking-services/' + service), {
-      service,
-      imageUrl,
-      price: Number(price),
-      description,
-    });
+    if (Number(price) < 1) {
+      throw new Error('Price cannot be 0 or negative number!');
+    }
 
-    this.router.navigate(['/succesfully']);
+    const serviceData: Service = {
+      _id: uuidv4(),
+      service: service.trim(),
+      imageUrl: imageUrl.trim(),
+      price: Number(price),
+      description: description.trim(),
+      ownerId: adminId?.trim(),
+    };
+
+    this.subscription$ = this.apiService.createService(serviceData).subscribe({
+      next: () => this.router.navigate(['/succesfully']),
+      error: (error) => (this.errorMessage = error.message),
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription$ !== undefined) {
+      this.subscription$.unsubscribe();
+    }
   }
 }
