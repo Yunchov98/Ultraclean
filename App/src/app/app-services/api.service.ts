@@ -25,4 +25,13 @@ export class ApiService {
       `${firebase.databaseURL}/job-requests.json`
     );
   }
+
+  createService(data: Service): Observable<Service> {
+    const { firebase } = environment;
+
+    return this.http.post<Service>(
+      `${firebase.databaseURL}/ultraclean-services.json`,
+      data
+    );
+  }
 }
