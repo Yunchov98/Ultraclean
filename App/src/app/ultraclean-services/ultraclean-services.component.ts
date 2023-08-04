@@ -33,7 +33,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribe$ = this.apiService
-      .getBookingServices()
+      .getCleaningRequests()
       .pipe(
         map((serv) => {
           const services: Service[] = [];
