@@ -11,8 +11,9 @@ import { User } from 'src/app/interfaces/User';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  errorMessage!: string;
+  errorMessage: string = '';
   userData!: User;
+  emailErrorMessage: string = '';
 
   constructor(
     private userService: UserService,
@@ -27,18 +28,25 @@ export class RegisterComponent {
 
     const { email, password } = registerForm.value;
 
+    if (email.toLowerCase().includes('admin')) {
+      this.emailErrorMessage = 'The email cannot contain admin in it';
+      throw new Error('The email cannot contain admin in it');
+    }
+
     this.userService
       .register(email, password)
       .then(() =>
-        this.userService.login(email, password).then((data) => {
-          this.userData = { _id: data.user?.uid, email: data.user?.email };
+        this.userService
+          .login(email, password)
+          .then((data) => {
+            this.userData = { _id: data.user?.uid, email: data.user?.email };
 
-          this.authService.setUserData(this.userData);
+            this.authService.setUserData(this.userData);
 
-          this.router.navigate(['/']);
-        })
+            this.router.navigate(['/']);
+          })
+          .catch((err) => console.log(err))
       )
-      .catch((err) => (this.errorMessage = 'Email already exists!'))
-      .catch((err) => (this.errorMessage = 'Email already exists!'));
+      .catch(() => (this.errorMessage = 'Email already exists!'));
   }
 }
