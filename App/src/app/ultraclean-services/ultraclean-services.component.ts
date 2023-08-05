@@ -11,19 +11,20 @@ import { AuthService } from '../app-services/auth.service';
   styleUrls: ['./ultraclean-services.component.css'],
 })
 export class UltracleanServicesComponent implements OnInit, OnDestroy {
+  ultracleanServices: Service[] = [];
+  subscribe$!: Subscription;
+  isClicked: boolean = false;
+  isLoading: boolean = true;
+
   constructor(
     private apiService: ApiService,
     private authService: AuthService
   ) {}
 
-  services: Service[] = [];
-  subscribe$!: Subscription;
-  isClicked: boolean = false;
-  isLoading: boolean = true;
 
   isAdmin(): boolean {
     if (
-      this.authService.getUserData()?.email?.toLowerCase().includes('admin')
+      this.authService.getUserData()?.email?.toLowerCase().includes('@admin.com')
     ) {
       return true;
     }
@@ -33,7 +34,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribe$ = this.apiService
-      .getCleaningRequests()
+      .getUltracleanServices()
       .pipe(
         map((serv) => {
           const services: Service[] = [];
@@ -48,7 +49,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       )
       .subscribe({
         next: (services: Service[]) => {
-          this.services = services;
+          this.ultracleanServices = services;
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),
