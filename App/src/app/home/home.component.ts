@@ -8,6 +8,10 @@ import { AuthService } from '../app-services/auth.service';
 })
 export class HomeComponent {
   constructor(private authService: AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
   
   isAdmin(): boolean {
     if (
