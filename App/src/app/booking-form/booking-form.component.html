@@ -8,12 +8,15 @@
   <div class="flex justify-center mt-2 font-bold text-red-600">
     <p>Fields with * are required!</p>
   </div>
-  <div class="mt-8">
-    <form #bookingForm="ngForm">
+  <div class="flex justify-center" *ngIf="isLoading">
+    <app-spiner />
+  </div>
+  <div class="mt-8" *ngIf="!isLoading">
+    <form #bookingForm="ngForm" (ngSubmit)="createRequest(bookingForm)">
       <div class="grid grid-cols-2 space-x-3">
         <div class="flex flex-col">
           <label for="name" class="flex justify-start ml-2 text-sm md:text-xl"
-            >Name*</label
+            >Name <span class="text-red-500">*</span></label
           >
           <input
             type="text"
@@ -39,7 +42,7 @@
         </div>
         <div class="flex flex-col">
           <label for="email" class="flex justify-start ml-2 text-sm md:text-xl"
-            >Email*</label
+            >Email <span class="text-red-500">*</span></label
           >
           <input
             type="text"
@@ -67,7 +70,7 @@
       </div>
       <div class="flex flex-col mt-2">
         <label for="phone" class="flex justify-start ml-2 text-sm md:text-xl"
-          >Phone*</label
+          >Phone <span class="text-red-500">*</span></label
         >
         <input
           type="number"
@@ -93,10 +96,10 @@
       </div>
       <div class="flex flex-col mt-2">
         <label for="address" class="flex justify-start ml-2 text-sm md:text-xl"
-          >Address*</label
+          >Address <span class="text-red-500">*</span></label
         >
         <input
-          type="tel"
+          type="text"
           name="address"
           class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
           ngModel
@@ -118,52 +121,61 @@
         </ng-container>
       </div>
       <div class="flex flex-col mt-2">
-        <label for="town" class="flex justify-start ml-2 text-sm md:text-xl"
+        <label for="city" class="flex justify-start ml-2 text-sm md:text-xl"
           >City / Town</label
         >
         <input
-          type="tel"
-          name="town"
+          type="text"
+          name="city"
           class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
+          ngModel
+          #cityInput="ngModel"
         />
       </div>
       <div class="flex flex-col mt-2">
-        <label for="town" class="flex justify-start ml-2 text-sm md:text-xl"
-          >Services</label
+        <label for="services" class="flex justify-start ml-2 text-sm md:text-xl"
+          >Services <span class="text-red-500">*</span></label
         >
-
-        <!-- <div
-          class="flex flex-col items-center md:grid md:grid-cols-3 md:space-x-2"
+        <ng-select
+          required
+          ngModel
+          #select="ngModel"
+          [(ngModel)]="selectedServices"
+          [ngModelOptions]="{ standalone: true }"
+          [items]="services"
+          bindLabel="service"
+          placeholder="--Select--"
+          [multiple]="true"
+          [closeOnSelect]="false"
+          [clearable]="true"
+          clearAllText="Clear All"
+          (change)="sum()"
         >
-          <div
-            *ngFor="let service of selectedServices"
-            class="border-2 text-sm md:text-xl w-fit pl-2 pr-2 pt-1 pb-1 rounded-full mt-2 mb-2 space-x-2 border-black"
-          >
-            <span>{{ service }}</span>
-            <span
-              class="cursor-pointer text-gray-800 hover:text-black hover:rounded-full hover:bg-gray-300 pl-2 pr-2 pt-1 pb-1 hover:opacity-90"
-              >X</span
-            >
-          </div>
-        </div> -->
-
-        <select
-          name="services"
-          id="services"
-          class="border-2 border-slate-700 rounded-xl text-sm md:text-xl"
-        >
-          <option
-            *ngFor="let service of services"
-            class="text-sm md:text-xl"
-            value="service"
-          >
-            {{ service.service }}
-          </option>
-        </select>
+          <!-- <ng-option *ngFor="let service of services" [value]="service._id">{{
+            service.service
+          }} </ng-option> -->
+        </ng-select>
+        <ng-container *ngIf="select.touched">
+          <p class="text-red-600" *ngIf="select.errors?.['required']">
+            Please select a service!
+          </p>
+        </ng-container>
       </div>
       <div class="flex justify-center space-x-3 mt-4">
         <span class="text-sm md:text-xl">I am not a robot</span>
-        <input type="checkbox" />
+        <label for="check"></label>
+        <input required ngModel #check="ngModel" type="checkbox" name="check" />
+        <ng-container *ngIf="!check.touched">
+          <p class="text-red-600" *ngIf="check.errors?.['required']">
+            Please confirm!
+          </p>
+        </ng-container>
+      </div>
+      <div class="flex justify-center mt-4 font-bold" *ngIf="totalPrice > 0">
+        <span>Total Price: {{ totalPrice }}$</span>
+      </div>
+      <div class="flex justify-center" *ngIf="errorMessage">
+        <p class="text-red-600">{{ errorMessage }}</p>
       </div>
       <div
         class="flex justify-center mt-4 border-2 border-black bg-black text-white rounded-full"
