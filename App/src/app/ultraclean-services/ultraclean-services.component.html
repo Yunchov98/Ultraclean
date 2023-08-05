@@ -14,28 +14,28 @@
       class="flex flex-col text-sm items-center md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-3 md:space-y-0 space-y-4"
     >
       <div
-        *ngFor="let data of services"
+        *ngFor="let service of ultracleanServices"
         class="border-2 border-black w-fit p-2 text-xs h-fit md:text-base lg:text-lg"
       >
         <span class="flex justify-center bg-green-700 p-1">{{
-          data.service
+          service.service
         }}</span>
         <img
           *ngIf="isClicked === false"
           class="w-40 mx-auto mt-2 h-40"
-          src="{{ data.imageUrl }}"
+          src="{{ service.imageUrl }}"
           alt="service"
         />
         <img
           *ngIf="isClicked"
           class="w-120 mx-auto mt-2 h-120"
-          src="{{ data.imageUrl }}"
+          src="{{ service.imageUrl }}"
           alt="service"
         />
         <div *ngIf="isClicked" class="mt-2">
-          <p class="mx-auto">{{ data.description }}</p>
+          <p class="mx-auto">{{ service.description }}</p>
           <p class="border-2 w-fit mx-auto mt-5 text-xl">
-            Price: ${{ data.price }}
+            Price: ${{ service.price }}
           </p>
         </div>
 
