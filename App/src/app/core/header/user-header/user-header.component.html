@@ -53,17 +53,11 @@
         <a routerLink="/services">Services</a>
       </li>
       <li
+        *ngIf="isLoggedIn"
         class="display: text-amber-600 inline-block cursor-pointer hover:text-stone-900 text-3xl"
       >
         <a routerLink="/application">Join us</a>
       </li>
     </ul>
   </nav>
-  <!-- <div
-    class="hidden lg:flex justify-center mt-5 bg-green-700 rounded-full md:pl-2 md:pr-2 md:pb-1"
-  >
-    <div class="hover:text-white rounded-full cursor-pointer text-2xl">
-      <a routerLink="/book">Gallery</a>
-    </div>
-  </div> -->
 </div>
