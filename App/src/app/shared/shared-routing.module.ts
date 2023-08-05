@@ -10,7 +10,7 @@ const routes: Routes = [
     component: ContactsComponent,
   },
   {
-    path: 'succesfully',
+    path: 'successfully',
     component: SuccessfullyComponent,
   },
 ];
