@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,15 +13,20 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './add-service.component.html',
   styleUrls: ['./add-service.component.css'],
 })
-export class AddServiceComponent implements OnDestroy {
+export class AddServiceComponent implements OnInit, OnDestroy {
   subscription$!: Subscription;
   errorMessage: string = '';
+  isLoading = true;
 
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    this.isLoading = false;
+  }
 
   createServiceHandler(form: NgForm): void {
     if (form.invalid) {
@@ -45,7 +50,7 @@ export class AddServiceComponent implements OnDestroy {
     };
 
     this.subscription$ = this.apiService.createService(serviceData).subscribe({
-      next: () => this.router.navigate(['/succesfully']),
+      next: () => this.router.navigate(['/successfully']),
       error: (error) => (this.errorMessage = error.message),
     });
   }

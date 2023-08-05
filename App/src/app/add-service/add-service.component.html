@@ -5,7 +5,10 @@
       Add Service
     </h2>
   </div>
-  <div class="mt-5">
+  <div class="flex justify-center mt-8" *ngIf="isLoading">
+    <app-spiner />
+  </div>
+  <div class="mt-5" *ngIf="!isLoading">
     <form #form="ngForm" (ngSubmit)="createServiceHandler(form)">
       <div class="flex flex-col">
         <label for="service"></label>
