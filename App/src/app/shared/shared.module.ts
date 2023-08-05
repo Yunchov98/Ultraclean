@@ -9,8 +9,20 @@ import { SuccessfullyComponent } from './successfully/successfully.component';
 import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
-  declarations: [SpinerComponent, ContactsButtonComponent, CancelButtonComponent, SuccessfullyComponent, LogoutComponent],
+  declarations: [
+    SpinerComponent,
+    ContactsButtonComponent,
+    CancelButtonComponent,
+    SuccessfullyComponent,
+    LogoutComponent,
+  ],
   imports: [CommonModule, SharedRoutingModule],
-  exports: [SpinerComponent, ContactsButtonComponent, CancelButtonComponent, SuccessfullyComponent, LogoutComponent],
+  exports: [
+    SpinerComponent,
+    ContactsButtonComponent,
+    CancelButtonComponent,
+    SuccessfullyComponent,
+    LogoutComponent,
+  ],
 })
 export class SharedModule {}
