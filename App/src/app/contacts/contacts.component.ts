@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
-  styleUrls: ['./contacts.component.css']
+  styleUrls: ['./contacts.component.css'],
 })
-export class ContactsComponent {
+export class ContactsComponent implements OnInit {
+  isLoading: boolean = true;
 
+  ngOnInit(): void {
+    this.isLoading = false;
+  }
 }
