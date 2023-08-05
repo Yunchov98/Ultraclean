@@ -6,7 +6,8 @@
   <div
     class="rounded-full hover:text-white bg-green-700 uppercase mt-4 md:text-4xl pl-3 pt-2 pr-3 pb-2 cursor-pointer"
   >
-    <a routerLink="/booking-form">book clean in 60 seconds</a>
+    <a *ngIf="isLoggedIn" routerLink="/booking-form">book clean in 60 seconds</a>
+    <a *ngIf="!isLoggedIn" routerLink="/login">You must be logged in to make a request</a>
   </div>
 </div>
 
