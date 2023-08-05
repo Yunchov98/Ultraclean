@@ -16,7 +16,7 @@
           pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
         />
 
-        <ng-container *ngIf="emailInput.touched || emailInput.invalid">
+        <ng-container *ngIf="emailInput.touched">
           <p class="text-red-600" *ngIf="emailInput.errors?.['required']">
             Email is required!
           </p>
@@ -45,7 +45,7 @@
           maxlength="20"
         />
 
-        <ng-container *ngIf="passwordInput.touched || passwordInput.invalid">
+        <ng-container *ngIf="passwordInput.touched">
           <p class="text-red-600" *ngIf="passwordInput.errors?.['required']">
             Password is required!
           </p>
@@ -70,7 +70,7 @@
         />
 
         <ng-container
-          *ngIf="repeatPasswordInput.touched || repeatPasswordInput.invalid"
+          *ngIf="repeatPasswordInput.touched"
         >
           <p
             class="text-red-600"
@@ -88,6 +88,9 @@
       </div>
       <div class="flex justify-center" *ngIf="errorMessage">
         <p class="text-red-600">{{ errorMessage }}</p>
+      </div>
+      <div *ngIf="emailErrorMessage">
+        <p class="text-red-600">{{ emailErrorMessage }}</p>
       </div>
       <input type="submit" value="Sign Up" class="button" />
     </form>
