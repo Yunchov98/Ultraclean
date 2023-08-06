@@ -30,7 +30,7 @@
           <span class="block"
             >Expected salary: {{ data.salary ? data.salary + "$" : "" }}</span
           >
-          <span class="block">Porfolio: {{ data.portfolio }}</span>
+          <span class="block">Porfolio: <a target="_blank" *ngIf="data.portfolio.length > 0" class="underline hover:text-blue-700 text-blue-500" href="{{data.portfolio}}">Porfolio Link</a></span>
         </div>
         <div class="bg-slate-400 mx-auto w-fit pl-2 pr-2 rounded-xl">
           <span>Comments: {{data.comments}}</span>
