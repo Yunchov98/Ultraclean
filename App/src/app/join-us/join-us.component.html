@@ -6,14 +6,17 @@
   <div class="flex justify-center mt-2 font-bold text-red-600">
     <p>Fields with * are required!</p>
   </div>
-  <div class="mt-5">
+  <div class="flex justify-center mt-8" *ngIf="isLoading">
+    <app-spiner />
+  </div>
+  <div class="mt-5" *ngIf="!isLoading">
     <form #jobForm="ngForm" (ngSubmit)="submitHandler(jobForm)">
       <div class="flex flex-col md:grid md:grid-cols-2 space-x-3">
         <div class="flex flex-col">
           <label
             class="flex justify-start text-sm md:text-lg mt-1"
             for="firstName"
-            >First Name*</label
+            >First Name<span class="text-red-500">*</span></label
           >
           <input
             class="border-2 border-slate-700 text-sm md:text-xl mt-1"
@@ -41,7 +44,7 @@
           <label
             class="flex justify-start text-sm md:text-lg mt-1"
             for="lastName"
-            >Last Name*</label
+            >Last Name<span class="text-red-500">*</span></label
           >
           <input
             class="border-2 border-slate-700 text-sm md:text-xl mt-1"
@@ -64,7 +67,7 @@
         </div>
       </div>
       <div class="flex flex-col mt-2">
-        <label for="email">Email*</label>
+        <label for="email">Email<span class="text-red-500">*</span></label>
         <input
           type="text"
           name="email"
@@ -90,7 +93,6 @@
       </div>
       <div class="flex flex-col mt-2">
         <label for="portfolio">Portfolio</label>
-        <!-- <p>Error</p> -->
         <input
           type="text"
           name="portfolio"
@@ -98,14 +100,22 @@
           class="border-2 border-slate-700"
           placeholder="http://"
           ngModel
+          #portfolioInput="ngModel"
+          pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+
         />
+
+        <ng-container *ngIf="portfolioInput.touched">
+          <p class="text-red-600" *ngIf="portfolioInput.errors?.['pattern']">
+            Invalid URL!
+          </p>
+        </ng-container>
       </div>
       <div class="flex flex-col md:grid md:grid-cols-2 space-x-3 mt-2">
         <div class="flex flex-col">
           <label class="flex justify-start" for="salary"
             >Salary requirements</label
           >
-          <!-- <p>Error</p> -->
           <input
             class="border-2 border-slate-700 mt-1"
             type="number"
@@ -118,7 +128,6 @@
           <label class="flex justify-start" for="startDate"
             >When can you start?</label
           >
-          <!-- <p>Error</p> -->
           <input
             class="border-2 border-slate-700 mt-1"
             type="date"
@@ -130,7 +139,6 @@
       </div>
       <div class="flex flex-col mt-2">
         <label for="lastCompany">Last company you worked for</label>
-        <!-- <p>Error</p> -->
         <input
           type="text"
           name="lastCompany"
@@ -141,7 +149,6 @@
       </div>
       <div class="flex flex-col mt-2">
         <label for="comments">Reference / Comments / Questions</label>
-        <!-- <p>Error</p> -->
         <textarea
           name="comments"
           id="comments"
@@ -151,7 +158,7 @@
           ngModel
         ></textarea>
       </div>
-      <div class=" p-2 text-black">
+      <div class="p-2 text-black">
         <div class="flex justify-center space-x-4 mt-2">
           <label for="check">I am not robot</label>
           <input
@@ -163,8 +170,10 @@
             required
           />
 
-          <ng-container *ngIf="jobForm.invalid">
-            <p class="text-red-600 bg-white">Click on the checkbox to continue!</p>
+          <ng-container *ngIf="!checkInput.touched && jobForm.invalid">
+            <p class="text-red-600 bg-white">
+              Click on the checkbox to continue!
+            </p>
           </ng-container>
         </div>
         <div class="flex justify-center mt-2">
