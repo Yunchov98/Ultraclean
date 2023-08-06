@@ -10,6 +10,9 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { JobRequestsComponent } from './job-requests/job-requests.component';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
+import { ServiceResolver } from './service-details/service-details.reselover';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -52,6 +55,15 @@ const routes: Routes = [
   {
     path: 'job-requests',
     component: JobRequestsComponent,
+  },
+  {
+    path: 'service/details/:id',
+    resolve: { service: ServiceResolver },
+    component: ServiceDetailsComponent,
+  },
+  {
+    path: 'error-page',
+    component: ErrorPageComponent,
   },
 ];
 
