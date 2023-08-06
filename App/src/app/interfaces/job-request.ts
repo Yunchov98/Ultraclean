@@ -1,5 +1,6 @@
 export interface JobRequest {
   _id: string;
+  _ownerId: string | undefined;
   comments: string;
   email: string;
   firstName: string;
@@ -8,4 +9,5 @@ export interface JobRequest {
   portfolio: string;
   salary: number;
   startDate: string;
+  createAt: string;
 }
