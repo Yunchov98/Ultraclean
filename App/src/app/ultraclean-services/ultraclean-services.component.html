@@ -1,4 +1,4 @@
-<div class="bg-white opacity-90 w-fit mx-auto p-10 mt-8 rounded-2xl">
+<div class="bg-white opacity-90 w-full md:w-fit mx-auto p-10 mt-8 rounded-2xl">
   <app-cancel-button />
   <div
     class="flex justify-center mb-10 uppercase cursor-default font-bold text-3xl"
@@ -17,7 +17,7 @@
         *ngFor="let service of ultracleanServices"
         class="border-2 border-black w-fit p-2 text-xs h-fit md:text-base lg:text-lg"
       >
-        <span class="flex justify-center bg-green-700 p-1">{{
+        <span class="flex justify-center font-bold bg-green-700 p-1">{{
           service.service
         }}</span>
         <img
@@ -41,20 +41,23 @@
 
         <div *ngIf="!isAdmin()" class="flex justify-center mt-4 space-x-2">
           <button
-            class="border-2 rounded-full border-black p-2"
-            (click)="toggle()"
+            [routerLink]="['/service', 'details', service._id]"
+            class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >
-            {{ isClicked ? "Hide" : "Learn More" }}
+            Learn More
           </button>
-          <a
+          <button
             routerLink="/booking-form"
-            class="border-2 rounded-full border-black p-2"
-            >Book Now</a
-          >
+            class="border-2 rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
+          >Book Now</button>
         </div>
         <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-2">
           <button class="border-2 rounded-2xl border-black p-2">Edit</button>
-          <button class="border-2 rounded-full border-black p-2 bg-red-500 text-white">Delete</button>
+          <button
+            class="border-2 rounded-full border-black p-2 bg-red-500 text-white"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
