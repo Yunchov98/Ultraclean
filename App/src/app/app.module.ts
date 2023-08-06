@@ -23,6 +23,8 @@ import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests
 import { AddServiceComponent } from './add-service/add-service.component';
 import { environment } from '../environments/environment';
 import { JobRequestsComponent } from './job-requests/job-requests.component';
+import { ServiceDetailsComponent } from './service-details/service-details.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { JobRequestsComponent } from './job-requests/job-requests.component';
     CleaningRequestsComponent,
     AddServiceComponent,
     JobRequestsComponent,
+    ServiceDetailsComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
