@@ -73,7 +73,7 @@ const routes: Routes = [
   {
     path: 'service/edit/:id',
     canActivate: [isAdminGuard],
-    resolve: { service: EditServiceResolver },
+    resolve: { service: ServiceResolver },
     component: EditServiceComponent,
   },
   {
