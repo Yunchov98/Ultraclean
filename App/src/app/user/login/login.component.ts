@@ -13,7 +13,7 @@ import { UserService } from 'src/app/app-services/user.service';
 })
 export class LoginComponent {
   errorMessage!: string;
-
+  token: string = '';
   userData!: User;
 
   constructor(
@@ -28,12 +28,23 @@ export class LoginComponent {
     this.userService
       .login(email, password)
       .then((data) => {
-        this.userData = { _id: data.user?.uid, email: data.user?.email };
+        data.user
+          ?.getIdToken()
+          .then((t) => {
+            this.userData = {
+              _id: data.user?.uid,
+              email: data.user?.email,
+              token: t,
+            };
+            this.authService.setUserData(this.userData);
+          })
+          .catch((err) => console.log(err));
+        
 
-        this.authService.setUserData(this.userData);
+        
 
         this.router.navigate(['/']);
       })
-      .catch((err) => (this.errorMessage = 'Wrong email or password!'));
+      .catch(() => (this.errorMessage = 'Wrong email or password!'));
   }
 }
