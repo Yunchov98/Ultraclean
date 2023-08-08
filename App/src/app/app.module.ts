@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,8 @@ import { environment } from '../environments/environment';
 import { JobRequestsComponent } from './job-requests/job-requests.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { EditServiceComponent } from './edit-service/edit-service.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     JobRequestsComponent,
     ServiceDetailsComponent,
     ErrorPageComponent,
+    EditServiceComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,13 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
