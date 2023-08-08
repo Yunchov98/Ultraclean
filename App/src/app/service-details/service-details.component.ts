@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../app-services/api.service';
 import { Service } from '../interfaces/Service';
+import { AuthService } from '../app-services/auth.service';
 
 @Component({
   selector: 'app-service-details',
@@ -9,20 +10,27 @@ import { Service } from '../interfaces/Service';
   styleUrls: ['./service-details.component.css'],
 })
 export class ServiceDetailsComponent implements OnInit {
-  service!: Service 
+  service!: Service;
   isLoading: boolean = true;
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private apiService: ApiService
-  ) {
-    // console.log(this.activeRoute.snapshot.data);
-    // this.activeRoute.params.subscribe((v) => console.log(v));
-  }
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.service = this.activeRoute.snapshot.data['service'];
+
     this.isLoading = false;
-    console.log(this.service);
+  }
+
+  isAdmin() {
+    if (
+      this.authService.getUserData()?.email?.toLowerCase().includes('admin')
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }
