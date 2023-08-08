@@ -26,19 +26,16 @@ export class ApiService {
     );
   }
 
-  getCleaningRequests(): Observable<CleaningRequest[]> {
-    return this.http.get<CleaningRequest[]>(
-      `${this.apiUrl}/cleaning-requests.json`
-    );
-  }
-
-  getJobRequests(): Observable<JobRequest[]> {
-    return this.http.get<JobRequest[]>(`${this.apiUrl}/job-requests.json`);
-  }
-
   createService(data: Service): Observable<Service> {
     return this.http.post<Service>(
       `${this.apiUrl}/ultraclean-services.json`,
+      data
+    );
+  }
+
+  editService(serviceId: string, data: Service): Observable<Service> {
+    return this.http.put<Service>(
+      `${this.apiUrl}/ultraclean-services/${serviceId}.json`,
       data
     );
   }
@@ -48,6 +45,16 @@ export class ApiService {
       `${this.apiUrl}/cleaning-requests.json`,
       data
     );
+  }
+
+  getCleaningRequests(): Observable<CleaningRequest[]> {
+    return this.http.get<CleaningRequest[]>(
+      `${this.apiUrl}/cleaning-requests.json`
+    );
+  }
+
+  getJobRequests(): Observable<JobRequest[]> {
+    return this.http.get<JobRequest[]>(`${this.apiUrl}/job-requests.json`);
   }
 
   sendJobRequest(data: JobRequest): Observable<JobRequest> {
