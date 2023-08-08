@@ -50,6 +50,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (services: Service[]) => {
           this.ultracleanServices = services;
+
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),
@@ -62,7 +63,6 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.subscribe$ !== undefined) {
-      console.log('unsub');
       this.subscribe$.unsubscribe();
     }
   }
