@@ -22,14 +22,4 @@ export class HeaderComponent {
 
     return false;
   }
-
-  isUser(): boolean {
-    if (
-      !this.authService.getUserData()?.email?.toLowerCase().includes('admin')
-    ) {
-      return true;
-    }
-
-    return false;
-  }
 }

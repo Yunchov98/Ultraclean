@@ -1,4 +1,4 @@
-<div *ngIf="isUser()">
+<div *ngIf="!isAdmin()">
   <app-user-header />
 </div>
 <div *ngIf="isAdmin()">
