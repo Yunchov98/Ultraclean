@@ -13,6 +13,10 @@ import { JobRequestsComponent } from './job-requests/job-requests.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { ServiceResolver } from './service-details/service-details.reselover';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { isUserGuard } from './core/guards/is-user.guard';
+import { isAdminGuard } from './core/guards/is-admin.guard';
+import { EditServiceComponent } from './edit-service/edit-service.component';
+import { EditServiceResolver } from './edit-service/edit-service-resolver';
 
 const routes: Routes = [
   {
@@ -34,10 +38,12 @@ const routes: Routes = [
   },
   {
     path: 'application',
+    canActivate: [isUserGuard],
     component: JoinUsComponent,
   },
   {
     path: 'booking-form',
+    canActivate: [isUserGuard],
     component: BookingFormComponent,
   },
   {
@@ -46,20 +52,29 @@ const routes: Routes = [
   },
   {
     path: 'cleaning-requests',
+    canActivate: [isAdminGuard],
     component: CleaningRequestsComponent,
   },
   {
     path: 'add-service',
+    canActivate: [isAdminGuard],
     component: AddServiceComponent,
   },
   {
     path: 'job-requests',
+    canActivate: [isAdminGuard],
     component: JobRequestsComponent,
   },
   {
     path: 'service/details/:id',
     resolve: { service: ServiceResolver },
     component: ServiceDetailsComponent,
+  },
+  {
+    path: 'service/edit/:id',
+    canActivate: [isAdminGuard],
+    resolve: { service: EditServiceResolver },
+    component: EditServiceComponent,
   },
   {
     path: 'error-page',
