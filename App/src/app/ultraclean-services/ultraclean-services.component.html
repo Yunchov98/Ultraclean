@@ -15,7 +15,7 @@
     >
       <div
         *ngFor="let service of ultracleanServices"
-        class="border-2 border-black w-fit p-2 text-xs h-fit md:text-base lg:text-lg"
+        class="border-2 border-black max-w-2xl p-2 text-xs h-fit md:text-base lg:text-lg"
       >
         <span class="flex justify-center font-bold bg-green-700 p-1">{{
           service.service
@@ -49,12 +49,20 @@
           <button
             routerLink="/booking-form"
             class="border-2 rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
-          >Book Now</button>
+          >
+            Book Now
+          </button>
         </div>
-        <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-2">
-          <button class="border-2 rounded-2xl border-black p-2">Edit</button>
+        <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-3">
           <button
-            class="border-2 rounded-full border-black p-2 bg-red-500 text-white"
+            [routerLink]="['/service', 'edit', service._id]"
+            class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
+          >
+            Edit
+          </button>
+          <button
+            [routerLink]="['/service', 'details', service._id]"
+            class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >
             Delete
           </button>
