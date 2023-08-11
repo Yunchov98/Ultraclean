@@ -8,36 +8,60 @@
   <div class="flex justify-center" *ngIf="isLoading">
     <app-spiner />
   </div>
+  <div *ngIf="!isLoading && requests.length === 0">
+    <span>There are no job requests right now</span>
+  </div>
   <div>
     <div
-      *ngIf="isLoading === false"
+      *ngIf="!isLoading && requests.length > 0"
       class="flex flex-col space-y-4 md:space-y-0 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-3"
     >
       <div
         *ngFor="let data of requests"
-        class="space-y-3 rounded-3xl mx-auto border-2 border-black w-11/12 h-fit p-2 text-sm md:text-base lg:text-lg"
+        class="space-y-3 rounded-3xl mx-auto border-2 border-black max-w-2xl min-w-full p-2 text-sm md:text-base lg:text-lg"
       >
         <div class="mx-auto space-x-2 bg-slate-100 pl-2 pr-2 w-fit rounded-xl">
-          <span class="">{{ data.firstName }}</span>
-          <span class="">{{ data.lastName }}</span>
-        </div>
-        <div class="bg-slate-200 mx-auto w-fit pl-2 pr-2 rounded-xl">
-          <span>Email: {{ data.email }}</span>
-        </div>
-        <div class="bg-slate-300 mx-auto w-fit pl-2 pr-2 rounded-xl">
-          <span class="block">Last company: {{ data.lastCompany }}</span>
-          <span class="block">Can start on: {{ data.startDate }}</span>
+          <div class="flex justify-center mb-1 font-bold space-x-1">
+            <span>{{ data.firstName }}</span>
+            <span>{{ data.lastName }}</span>
+          </div>
+          <span class="block">Email: {{ data.email }}</span>
           <span class="block"
-            >Expected salary: {{ data.salary ? data.salary + "$" : "" }}</span
+            >Last company:
+            {{ data.lastCompany ? data.lastCompany : "none" }}</span
           >
-          <span class="block">Porfolio: <a target="_blank" *ngIf="data.portfolio.length > 0" class="underline hover:text-blue-700 text-blue-500" href="{{data.portfolio}}">Porfolio Link</a></span>
-        </div>
-        <div class="bg-slate-400 mx-auto w-fit pl-2 pr-2 rounded-xl">
-          <span>Comments: {{data.comments}}</span>
+          <span class="block"
+            >Can start on: {{ data.startDate ? data.startDate : "none" }}</span
+          >
+          <span class="block"
+            >Expected salary:
+            {{ data.salary ? data.salary + "$" : "none" }}</span
+          >
+          <span class="block"
+            >Porfolio:
+            <a
+              target="_blank"
+              *ngIf="data.portfolio"
+              class="underline hover:text-blue-700 text-blue-500"
+              href="{{ data.portfolio }}"
+              >Porfolio Link</a
+            >
+            <span *ngIf="!data.portfolio">none</span>
+          </span>
+          <span>Comments: {{ data.comments ? data.comments : "none" }}</span>
         </div>
         <div class="flex justify-center space-x-5">
-            <button class="bg-green-700 rounded-full font-bold pl-2 pr-2 pt-1 pb-1 text-black hover:bg-green-800">Accept</button>
-            <button class="bg-red-700 rounded-full font-bold pl-2 pr-2 pt-1 pb-1 text-black hover:bg-red-800">Reject</button>
+          <button
+            (click)="acceptHandle(data._id)"
+            class="rounded-full font-bold pl-2 pr-2 pt-1 pb-1 hover:underline text-black hover:text-xl"
+          >
+            Accept
+          </button>
+          <button
+            class="rounded-full font-bold pl-2 pr-2 pt-1 pb-1 hover:underline text-black hover:text-xl hover:text-red-500"
+          >
+            Reject
+          </button>
         </div>
       </div>
     </div>
