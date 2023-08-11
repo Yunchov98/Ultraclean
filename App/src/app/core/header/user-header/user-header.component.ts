@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { AuthService } from 'src/app/app-services/auth.service';
+import { UserService } from 'src/app/app-services/user.service';
+import { User } from 'src/app/interfaces/User';
 
 @Component({
   selector: 'app-user-header',
   templateUrl: './user-header.component.html',
   styleUrls: ['./user-header.component.css'],
 })
-export class UserHeaderComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+export class UserHeaderComponent implements OnInit {
+  subscription$!: Subscription;
+  user!: User | null;
+
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }
 
-  logoutHandler() {
-    this.authService.clearUserData();
-
-    this.router.navigate(['/']);
+  ngOnInit(): void {
+    this.user = this.authService.getUserData();
   }
 }
