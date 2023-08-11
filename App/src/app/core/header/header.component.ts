@@ -9,14 +9,8 @@ import { AuthService } from 'src/app/app-services/auth.service';
 export class HeaderComponent {
   constructor(private authService: AuthService) {}
 
-  get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn;
-  }
-
   isAdmin(): boolean {
-    if (
-      this.authService.getUserData()?.email?.toLowerCase().includes('admin')
-    ) {
+    if (this.authService.getUserData()?.isAdmin) {
       return true;
     }
 
