@@ -15,6 +15,7 @@ export class LoginComponent {
   errorMessage!: string;
   token: string = '';
   userData!: User;
+  isAdmin: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -31,17 +32,22 @@ export class LoginComponent {
         data.user
           ?.getIdToken()
           .then((t) => {
+            if (data.user?.email === 'admin@admin.com') {
+              this.isAdmin = true;
+            }
+
             this.userData = {
               _id: data.user?.uid,
               email: data.user?.email,
               token: t,
+              currentOrder: [],
+              myOrders: [],
+              isAdmin: this.isAdmin,
             };
+
             this.authService.setUserData(this.userData);
           })
           .catch((err) => console.log(err));
-        
-
-        
 
         this.router.navigate(['/']);
       })
