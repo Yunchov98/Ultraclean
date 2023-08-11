@@ -4,6 +4,7 @@ import { Subscription, map } from 'rxjs';
 import { Service } from '../interfaces/Service';
 import { ApiService } from '../app-services/api.service';
 import { AuthService } from '../app-services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ultraclean-services',
@@ -11,20 +12,26 @@ import { AuthService } from '../app-services/auth.service';
   styleUrls: ['./ultraclean-services.component.css'],
 })
 export class UltracleanServicesComponent implements OnInit, OnDestroy {
-  ultracleanServices: Service[] = [];
   subscribe$!: Subscription;
+  deleteSubscription$!: Subscription;
+
+  ultracleanServices: Service[] = [];
+
   isClicked: boolean = false;
   isLoading: boolean = true;
 
   constructor(
     private apiService: ApiService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
-
 
   isAdmin(): boolean {
     if (
-      this.authService.getUserData()?.email?.toLowerCase().includes('@admin.com')
+      this.authService
+        .getUserData()
+        ?.email?.toLowerCase()
+        .includes('@admin.com')
     ) {
       return true;
     }
@@ -50,10 +57,23 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (services: Service[]) => {
           this.ultracleanServices = services;
-
+          console.log(this.ultracleanServices);
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),
+      });
+  }
+
+  deleteHandle(id: string) {
+    this.deleteSubscription$ = this.apiService
+      .deleteUltraCleanService(id)
+      .subscribe({
+        next: () => {
+          if (confirm('Do you really want to delete this service ?')) {
+            this.router.navigate(['/successfully']);
+          }
+        },
+        error: (err) => console.log(err),
       });
   }
 
