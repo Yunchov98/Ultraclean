@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/app-services/auth.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -8,11 +6,5 @@ import { AuthService } from 'src/app/app-services/auth.service';
   styleUrls: ['./admin-header.component.css'],
 })
 export class AdminHeaderComponent {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  logoutHandler(): void {
-    this.authService.clearUserData();
-
-    this.router.navigate(['/']);
-  }
+  constructor() {}
 }
