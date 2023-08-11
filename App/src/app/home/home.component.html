@@ -1,26 +1,29 @@
-<div
+<div class="mt-56">
+  <div
   *ngIf="!isAdmin()"
-  class="flex-col flex items-center mt-20 text-2xl md:text-5xl lg:text-7xl text-black bg-gray-200 opacity-90 w-full pb-2"
+  class="flex-col flex text-center mt-20 text-2xl md:text-5xl lg:text-7xl text-black bg-gray-200 opacity-90 w-full pb-2"
 >
   <h1 class="uppercase font-kalam mt-4">you deserve a clean home</h1>
   <div
-    class="rounded-full hover:text-white bg-green-700 uppercase mt-4 md:text-4xl pl-3 pt-2 pr-3 pb-2 cursor-pointer"
+    class="rounded-full w-11/12 md:w-9/12 lg:w-3/6 mx-auto hover:text-white bg-green-700 uppercase text-lg mt-4 md:text-4xl pl-3 pt-2 pr-3 pb-2 cursor-pointer"
   >
     <a *ngIf="isLoggedIn" routerLink="/booking-form">book clean in 60 seconds</a>
     <a *ngIf="!isLoggedIn" routerLink="/login">You must be logged in to make a request</a>
   </div>
+</div>
 </div>
 
 <!-- Admin's home page view  -->
 
 <div
   *ngIf="isAdmin()"
-  class="flex-col flex items-center mt-20 text-2xl md:text-5xl lg:text-7xl text-black bg-gray-200 opacity-90 w-full pb-2"
+  class="flex-col flex items-center mt-20 text-2xl md:text-5xl text-black bg-gray-200 opacity-90 w-full pb-2"
 >
-  <h1 class="uppercase">be positive</h1>
+  <h1 class="uppercase text-center">“Success usually comes to those who are too busy looking for it.” — Henry David Thoreau</h1>
   <div
+  routerLink="/profile"
     class="rounded-full hover:text-white bg-green-700 uppercase mt-4 md:text-4xl pl-3 pt-2 pr-3 pb-2 cursor-pointer"
   >
-    keep smiling :)
+    Profile
   </div>
 </div>
