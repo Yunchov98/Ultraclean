@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 
 import { v4 as uuidv4 } from 'uuid';
 import { ApiService } from '../app-services/api.service';
 import { JobRequest } from '../interfaces/Job-request';
 import { AuthService } from '../app-services/auth.service';
+import { User } from '../interfaces/User';
 
 @Component({
   selector: 'app-join-us',
@@ -14,8 +15,12 @@ import { AuthService } from '../app-services/auth.service';
   styleUrls: ['./join-us.component.css'],
 })
 export class JoinUsComponent implements OnInit, OnDestroy {
-  subscription!: Subscription;
+  subscription$!: Subscription;
+  workersSubscription$!: Subscription;
   isLoading: boolean = true;
+  errorMessage: string = '';
+  userData!: User | null;
+  isDisabled: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -24,55 +29,93 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.userData = this.authService.getUserData();
+
+    this.workersSubscription$ = this.apiService
+      .getWorkers()
+      .pipe(
+        map((workers) => {
+          const workersArr: JobRequest[] = [];
+
+          for (const key in workers) {
+            if (workers.hasOwnProperty(key)) {
+              workersArr.push({ ...workers[key], _id: key });
+            }
+          }
+
+          return workersArr;
+        })
+      )
+      .subscribe({
+        next: (workersArr: JobRequest[]) => {
+          for (const worker of workersArr) {
+            if (worker._ownerId === this.userData?._id) {
+              this.errorMessage = 'You are already an employee in our company';
+              this.isDisabled = true;
+              return;
+            }
+          }
+        },
+        error: (error) => console.log(`Error: ${error}`),
+      });
+
     this.isLoading = false;
   }
 
   submitHandler(jobForm: NgForm) {
+    const userData = this.authService.getUserData();
+
     if (jobForm.invalid) {
       return;
     }
 
-    if (!this.authService.getUserData()) {
+    if (!userData) {
       this.router.navigate(['/error-page']);
       throw new Error('You have to be logged in!');
     }
 
-    const {
-      comments,
-      email,
-      firstName,
-      lastCompany,
-      lastName,
-      portfolio,
-      salary,
-      startDate,
-    } = jobForm.value;
+    if (this.errorMessage === '') {
+      const {
+        comments,
+        email,
+        firstName,
+        lastCompany,
+        lastName,
+        portfolio,
+        salary,
+        startDate,
+      } = jobForm.value;
 
-    const userId = this.authService.getUserData()?._id;
+      const jobRequest: JobRequest = {
+        _id: uuidv4(),
+        _ownerId: userData._id,
+        firstName,
+        lastName,
+        lastCompany,
+        comments,
+        email,
+        portfolio,
+        salary: Number(salary),
+        startDate,
+        createAt: new Date().toString(),
+      };
 
-    const jobRequest: JobRequest = {
-      _id: uuidv4(),
-      _ownerId: userId,
-      firstName,
-      lastName,
-      lastCompany,
-      comments,
-      email,
-      portfolio,
-      salary: Number(salary),
-      startDate,
-      createAt: new Date().toString(),
-    };
-
-    this.subscription = this.apiService.sendJobRequest(jobRequest).subscribe({
-      next: () => this.router.navigate(['/successfully']),
-      error: (err) => console.log(err),
-    });
+      this.subscription$ = this.apiService
+        .sendJobRequest(jobRequest)
+        .subscribe({
+          next: () => this.router.navigate(['/successfully']),
+          error: (err) => console.log(err),
+        });
+    }
   }
 
   ngOnDestroy(): void {
-    if (this.subscription !== undefined) {
-      this.subscription.unsubscribe();
+    if (this.subscription$ !== undefined) {
+      this.subscription$.unsubscribe();
+    }
+
+    if (this.workersSubscription$ !== undefined) {
+      this.workersSubscription$.unsubscribe();
     }
   }
 }
