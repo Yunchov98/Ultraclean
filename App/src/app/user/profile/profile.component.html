@@ -1,0 +1,325 @@
+<div class="mx-auto mt-10 bg-white w-fit p-10 rounded-xl">
+  <div class="mb-8">
+    <app-cancel-button />
+  </div>
+  <span class="text-3xl flex justify-center">User Profile</span>
+  <img
+    class="w-20 mx-auto mt-4"
+    src="../../../assets/images/profile-pic.jpg"
+    alt="profile-pic"
+  />
+  <div class="flex flex-col mt-4">
+    <span class="flex justify-center">Email: {{ user?.email }}</span>
+    <span class="flex justify-center"
+      >Admin: {{ user?.isAdmin ? "Yes" : "No" }}</span
+    >
+  </div>
+
+  <div *ngIf="isLoading" class="flex justify-center mt-4">
+    <app-spiner />
+  </div>
+
+  <div *ngIf="!isLoading">
+    <!-- My Orders / Accepted Orders -->
+    <div class="mt-4">
+      <div *ngIf="requests.length === 0 && !user?.isAdmin">
+        <div
+          class="flex flex-col space-y-3 bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+        >
+          <span class="text-center">There are no requests right now</span>
+          <button
+            routerLink="/booking-form"
+            class="bg-gray-400 hover:bg-gray-500 cursor-pointer rounded-full pt-1 pr-2 pb-1 pl-2"
+          >
+            Make your first request
+          </button>
+        </div>
+      </div>
+      <div
+        *ngIf="totalAcceptedRequests > 0 || requests.length > 0"
+        class="bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+      >
+        <span
+          *ngIf="user?.isAdmin"
+          class="font-bold flex justify-center mb-4 underline"
+          >Accepted Orders: {{ totalAcceptedRequests }}</span
+        >
+        <span
+          *ngIf="!user?.isAdmin"
+          class="font-bold flex justify-center mb-4 underline"
+          >My Orders: {{ totalRequests }}</span
+        >
+        <div
+          *ngIf="!user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of requests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of acceptedRequests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span>Accepted At: {{ request.acceptedAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+            <div class="flex justify-center mt-5">
+              <button
+                (click)="finishRequest(request._id)"
+                class="bg-gray-400 hover:bg-gray-500 hover:text-white rounded-full pl-4 pr-4 items-center"
+              >
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rejected Orders -->
+    <div class="mt-4">
+      <div *ngIf="rejectedRequests.length === 0 && !user?.isAdmin">
+        <div
+          class="flex justify-center space-y-3 bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+        >
+          <span class="text-center">You have not rejected requests</span>
+        </div>
+      </div>
+      <div
+        *ngIf="totalRejectedRequests > 0"
+        class="bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+      >
+        <span
+          *ngIf="user?.isAdmin"
+          class="font-bold flex justify-center mb-4 underline"
+          >Rejected Requests: {{ totalRejectedRequests }}</span
+        >
+        <span
+          *ngIf="!user?.isAdmin"
+          class="font-bold flex justify-center mb-4 underline"
+          >Rejected Requests: {{ totalRejectedRequests }}</span
+        >
+        <div
+          *ngIf="!user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of rejectedRequests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span>Rejeceted At: {{ request.rejectedAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of rejectedRequests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span>Rejected At: {{ request.rejectedAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All Orders/ Finished Orders -->
+    <div *ngIf="isShown" class="mt-4">
+      <div *ngIf="totalFinishedRequests === 0 && user?.isAdmin">
+        <span>There are no requests right now</span>
+      </div>
+      <div
+        *ngIf="totalFinishedRequests > 0 && user?.isAdmin"
+        class="bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+      >
+        <span class="flex justify-center mb-4 underline"
+          >Finished Orders: {{ totalFinishedRequests }}</span
+        >
+        <div
+          *ngIf="user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of finishedRequests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center mt-3 font-bold">
+          Total Income: {{ totalSum }}$
+        </div>
+      </div>
+
+      <div *ngIf="totalFinishedRequests === 0 && !user?.isAdmin">
+        <div
+          class="flex flex-col space-y-3 bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+        >
+          <span class="text-center">--Empty--</span>
+          <button
+            routerLink="/booking-form"
+            class="bg-gray-400 hover:bg-gray-500 cursor-pointer rounded-full pt-1 pr-2 pb-1 pl-2"
+          >
+            Make your first request
+          </button>
+        </div>
+      </div>
+
+      <div
+        *ngIf="totalFinishedRequests > 0 && !user?.isAdmin"
+        class="bg-slate-300 rounded-xl pt-2 pr-7 pb-3 pl-7"
+      >
+        <div>
+          <span class="flex justify-center mb-4 underline"
+            >All Orders: {{ totalFinishedRequests }}</span
+          >
+        </div>
+        <div
+          *ngIf="!user?.isAdmin"
+          class="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3"
+        >
+          <div
+            *ngFor="let request of finishedRequests"
+            class="border-2 border-slate-900 p-3 rounded-xl"
+          >
+            <div class="mb-5">
+              <span>Created By: {{ request.email }}</span>
+            </div>
+            <span class="block">Selected Services:</span>
+            <div *ngFor="let service of request.services">
+              <span class="underline">{{ service.service }}</span>
+            </div>
+            <div class="mt-6 flex flex-col">
+              <span>Info:</span>
+              <span>Name: {{ request.name }}</span>
+              <span>Phone: {{ request.phone }}</span>
+              <span>Address: {{ request.address }}</span>
+              <span>Created At: {{ request.createdAt | date }}</span>
+              <span class="flex justify-center font-bold mt-4"
+                >Total Price: {{ request.totalPrice }}$</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center mt-3 font-bold">
+          Total Sum From All Orders: {{ totalSum }}$
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="user?.isAdmin"
+      class="flex justify-center font-bold cursor-pointer mt-4"
+    >
+      <span
+        class="bg-gray-400 pt-1 pr-2 pb-1 pl-2 rounded-full"
+        (click)="toggleHandler()"
+        >{{
+          isShown ? "Hide Finished Requests" : "View All Finished Requests"
+        }}</span
+      >
+    </div>
+
+    <div
+      *ngIf="!user?.isAdmin"
+      class="flex justify-center font-bold cursor-pointer mt-4"
+    >
+      <span
+        class="bg-gray-400 pt-1 pr-2 pb-1 pl-2 rounded-full"
+        (click)="toggleHandler()"
+        >{{ isShown ? "Hide All Orders" : "View All Orders" }}</span
+      >
+    </div>
+  </div>
+</div>
