@@ -27,6 +27,7 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { EditServiceComponent } from './edit-service/edit-service.component';
+import { WorkersComponent } from './workers/workers.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { EditServiceComponent } from './edit-service/edit-service.component';
     ServiceDetailsComponent,
     ErrorPageComponent,
     EditServiceComponent,
+    WorkersComponent,
   ],
   imports: [
     BrowserModule,

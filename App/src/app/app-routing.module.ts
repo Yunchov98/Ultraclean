@@ -16,7 +16,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { isUserGuard } from './core/guards/is-user.guard';
 import { isAdminGuard } from './core/guards/is-admin.guard';
 import { EditServiceComponent } from './edit-service/edit-service.component';
-import { EditServiceResolver } from './edit-service/edit-service-resolver';
+import { WorkersComponent } from './workers/workers.component';
 
 const routes: Routes = [
   {
@@ -80,6 +80,10 @@ const routes: Routes = [
     path: 'error-page',
     component: ErrorPageComponent,
   },
+  {
+    path: 'our-team',
+    component: WorkersComponent
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,51 @@
+<div class="bg-white opacity-90 w-fit mx-auto p-10 mt-8 rounded-2xl">
+  <div class="mb-2">
+    <app-cancel-button />
+  </div>
+  <div
+    class="flex justify-center mb-10 uppercase cursor-default font-bold text-3xl"
+  >
+    Our Team
+  </div>
+  <div class="flex justify-center" *ngIf="isLoading">
+    <app-spiner />
+  </div>
+  <div *ngIf="!allWorkers && !isLoading" class="flex justify-center">
+    <p>We are looking for employees</p>
+    <button routerLink="/application">Join Us</button>
+  </div>
+
+  <div *ngIf="allWorkers && !isLoading" class="flex justify-center">
+    <p>Employees: {{ allWorkers }}</p>
+  </div>
+
+  <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+    <div
+      *ngFor="let worker of workers"
+      class="border-2 border-black pt-2 pr-3 pb-2 pl-3"
+    >
+      <div class="flex justify-center">
+        <img
+          class="w-20 rounded-full"
+          src="../../assets/images/employee-avatar.jpg"
+          alt=""
+        />
+      </div>
+      <div class="flex justify-center space-x-3">
+        <span>{{ worker.firstName }}</span>
+        <span>{{ worker.lastName }}</span>
+      </div>
+      <div class="flex justify-center">
+        <span>Email: {{ worker.email }}</span>
+      </div>
+      <div class="flex justify-center mt-4" *ngIf="userData?.isAdmin">
+        <button
+        (click)="releaseHandle(worker._id)"
+          class="pt-1 pr-2 pb-1 pl-2 bg-red-500 uppercase rounded-full hover:text-white hover:bg-red-600"
+        >
+          Release
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
