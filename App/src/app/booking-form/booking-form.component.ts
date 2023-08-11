@@ -8,6 +8,7 @@ import { Service } from '../interfaces/Service';
 import { ApiService } from '../app-services/api.service';
 import { CleaningRequest } from '../interfaces/Cleaning-request';
 import { AuthService } from '../app-services/auth.service';
+import { User } from '../interfaces/User';
 
 @Component({
   selector: 'app-booking-form',
@@ -19,6 +20,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   services: Service[] = [];
   selectedServices: Service[] = [];
   request!: CleaningRequest;
+  userData!: any;
   isLoading: boolean = true;
   errorMessage: string = '';
   totalPrice: number = 0;
@@ -66,7 +68,20 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       throw new Error('Select a service(s)');
     }
 
-    const userId = this.authService.getUserData()?._id;
+    const user = this.authService.getUserData();
+    const userId = user?._id;
+
+    if (user) {
+      this.userData = {
+        currentOrder: this.selectedServices,
+        myOrders: this.selectedServices,
+      };
+
+      // user.myOrders.push(...this.selectedServices);
+      // user.currentOrder.push(...this.selectedServices);
+
+      console.log(user);
+    }
 
     const { name, email, phone, address, city } = bookingForm.value;
 
