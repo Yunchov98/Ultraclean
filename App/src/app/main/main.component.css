@@ -1,6 +1,8 @@
 .wrapper {
-    width: 100vw;
-    height: 100vh;
+    /* width: 100vw; */
+    /* height: 100vh; */
+    min-height: 1024px;
+    /* min-width: 1024px; */
     background: url("../../assets/images/1024px.46508076__1637027040-31208-TypeC5LivingFINALlow-res.jpg");
     background-size: cover;
   }
