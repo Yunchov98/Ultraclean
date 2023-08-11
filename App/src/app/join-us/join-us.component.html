@@ -102,7 +102,6 @@
           ngModel
           #portfolioInput="ngModel"
           pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
-
         />
 
         <ng-container *ngIf="portfolioInput.touched">
@@ -176,9 +175,13 @@
             </p>
           </ng-container>
         </div>
+        <p *ngIf="errorMessage" class="flex justify-center text-red-600">
+          {{ errorMessage }}
+        </p>
         <div class="flex justify-center mt-2">
           <button
-            class="uppercase border-1 bg-green-700 hover:bg-green-800 rounded-full pr-4 pl-4 pt-1 pb-1"
+            [disabled]="isDisabled"
+            class="uppercase border-1 disabled:bg-slate-500 bg-green-700 hover:bg-green-800 rounded-full pr-4 pl-4 pt-1 pb-1"
           >
             Submit
           </button>
