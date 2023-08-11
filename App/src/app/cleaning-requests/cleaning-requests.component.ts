@@ -3,6 +3,9 @@ import { Subscription, map } from 'rxjs';
 
 import { ApiService } from '../app-services/api.service';
 import { CleaningRequest } from '../interfaces/Cleaning-request';
+import { AcceptedRequest } from '../interfaces/Accepted-request';
+import { Router } from '@angular/router';
+import { RejectedRequest } from '../interfaces/Rejected-request';
 
 @Component({
   selector: 'app-cleaning-requests',
@@ -11,10 +14,14 @@ import { CleaningRequest } from '../interfaces/Cleaning-request';
 })
 export class CleaningRequestsComponent implements OnInit, OnDestroy {
   subscription$!: Subscription;
+  acceptRequestSubscription$!: Subscription;
+  rejectRequestSubscription$!: Subscription;
   cleaningRequests: CleaningRequest[] = [];
   isLoading = true;
+  acceptedRequest!: AcceptedRequest;
+  rejectedRequest!: RejectedRequest;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit(): void {
     this.subscription$ = this.apiService
@@ -37,6 +44,47 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),
+      });
+  }
+
+  acceptRequest(id: string) {
+    this.acceptRequestSubscription$ = this.apiService
+      .getCleaningRequestById(id)
+      .subscribe({
+        next: (data) => {
+          this.acceptedRequest = { ...data, acceptedAt: new Date().toString() };
+
+          this.apiService.acceptRequest(this.acceptedRequest).subscribe({
+            next: () =>
+              this.apiService.deleteCleaningRequest(id).subscribe({
+                next: () => this.router.navigate(['/profile']),
+                error: (err) => console.log(err),
+              }),
+            error: (err) => console.log(err),
+          });
+        },
+        error: (err) => console.log(err),
+      });
+    console.log(id);
+  }
+
+  rejectRequest(id: string) {
+    this.rejectRequestSubscription$ = this.apiService
+      .getCleaningRequestById(id)
+      .subscribe({
+        next: (data) => {
+          this.rejectedRequest = { ...data, rejectedAt: new Date().toString() };
+
+          this.apiService.addRejectedRequest(this.rejectedRequest).subscribe({
+            next: () =>
+              this.apiService.deleteCleaningRequest(id).subscribe({
+                next: () => this.router.navigate(['/profile']),
+                error: (err) => console.log(err),
+              }),
+            error: (err) => console.log(err),
+          });
+        },
+        error: (err) => console.log(err),
       });
   }
 
