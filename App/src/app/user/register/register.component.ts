@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from 'src/app/app-services/api.service';
+
 import { AuthService } from 'src/app/app-services/auth.service';
 import { UserService } from 'src/app/app-services/user.service';
 import { User } from 'src/app/interfaces/User';
@@ -21,8 +21,7 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private authService: AuthService,
-    private apiService: ApiService
+    private authService: AuthService
   ) {}
 
   registerHandler(registerForm: NgForm) {
@@ -32,14 +31,10 @@ export class RegisterComponent {
 
     const { email, password } = registerForm.value;
 
-    if (email.toLowerCase().includes('admin')) {
-      this.emailErrorMessage = 'The email cannot contain admin in it';
-      throw new Error('The email cannot contain admin in it');
-    }
-
     this.userService
       .register(email, password)
       .then((data) => {
+        console.log(data);
         data.user
           ?.getIdToken()
           .then((t) => {
@@ -47,11 +42,14 @@ export class RegisterComponent {
               _id: data.user?.uid,
               email: data.user?.email,
               token: t,
+              currentOrder: [],
+              myOrders: [],
+              isAdmin: false,
             };
 
             this.authService.setUserData(this.userData);
 
-            this.apiService.addUser(this.userData).subscribe({
+            this.userService.addUser(this.userData).subscribe({
               next: () => this.router.navigate(['/successfully']),
               error: (err) => console.log(err),
             });
