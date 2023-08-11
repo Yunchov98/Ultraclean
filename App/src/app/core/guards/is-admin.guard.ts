@@ -10,7 +10,7 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class isAdminGuard implements CanActivate {
-  email: string = '';
+  isAdmin!: boolean;
 
   constructor(private router: Router) {}
 
@@ -23,11 +23,12 @@ export class isAdminGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     const token = localStorage.getItem('userData');
+
     if (token) {
-      this.email = JSON.parse(token).email;
+      this.isAdmin = JSON.parse(token).isAdmin;
     }
 
-    if (this.email === 'admin@admin.com') {
+    if (this.isAdmin) {
       return true;
     }
 
