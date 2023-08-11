@@ -7,11 +7,13 @@ import { LoginComponent } from './login/login.component';
 import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { environment } from 'src/environments/environment';
+import { ProfileComponent } from './profile/profile.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
-  imports: [CommonModule, UserRoutingModule, FormsModule],
-  exports: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, ProfileComponent,],
+  imports: [CommonModule, UserRoutingModule, FormsModule, SharedModule],
+  exports: [LoginComponent, RegisterComponent, ProfileComponent],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
 })
 export class UserModule {}
