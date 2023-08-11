@@ -4,6 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { isGuesttGuard } from '../core/guards/is-guest.guard';
+import { ProfileComponent } from './profile/profile.component';
+import { UserResolver } from './user.resolver';
+import { isUserGuard } from '../core/guards/is-user.guard';
+import { isAdminGuard } from '../core/guards/is-admin.guard';
 
 const routes: Routes = [
   {
@@ -15,6 +19,11 @@ const routes: Routes = [
     path: 'register',
     canActivate: [isGuesttGuard],
     component: RegisterComponent,
+  },
+  {
+    path: 'profile',
+    canActivate: [isUserGuard],
+    component: ProfileComponent,
   },
 ];
 
