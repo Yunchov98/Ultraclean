@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (token) {
       request = request.clone({
         setParams: {
-          auth: token ?? '',
+          auth: token ? token : '',
         },
       });
     }
