@@ -1,7 +1,7 @@
 <div class="bg-white opacity-90 w-full md:w-fit mx-auto p-10 mt-8 rounded-2xl">
   <app-cancel-button />
   <div
-    class="flex justify-center mb-10 uppercase cursor-default font-bold text-3xl"
+    class="flex justify-center text-center mb-10 uppercase cursor-default font-bold text-3xl"
   >
     Our Services
   </div>
@@ -53,6 +53,7 @@
             Book Now
           </button>
         </div>
+
         <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-3">
           <button
             [routerLink]="['/service', 'edit', service._id]"
@@ -61,7 +62,7 @@
             Edit
           </button>
           <button
-            [routerLink]="['/service', 'details', service._id]"
+            (click)="deleteHandle(service._id)"
             class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >
             Delete
