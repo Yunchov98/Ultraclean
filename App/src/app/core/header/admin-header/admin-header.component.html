@@ -1,8 +1,7 @@
 <div class="flex justify-between text-5xl pt-10 items-center">
-  <div class="ml-20">
+  <div class="w-40 md:ml-10 md:w-52">
     <a routerLink="/home"
       ><img
-        class="w-40"
         src="../../../assets/images/logo-PhotoRoom.png-PhotoRoom.png"
         alt="logo"
     /></a>
@@ -10,20 +9,30 @@
   <span class="hidden cursor-default text-7xl font-staatliches lg:block"
     >ULTRACLEAN</span
   >
-  <div class="flex flex-col md:flex-row space-x-4 text-base md:text-lg mr-20">
+  <div
+    class="flex flex-col md:flex-row space-x-4 text-base md:text-lg mr-3 md:mr-10"
+  >
     <span
+      routerLink="/cleaning-requests"
       class="flex text-center border-black justify-center pl-1 pr-2 pt-1 pb-1 mb-3 cursor-pointer rounded-full opacity-100 bg-green-700 md:pl-3 md:mb-0 md:pr-3 md:pt-1 md:pb-1 hover:text-white"
-      ><a routerLink="/cleaning-requests">Cleaning requests</a></span
+      >Cleaning requests</span
     >
     <span
+      routerLink="/add-service"
       class="cursor-pointer text-center hover:text-white hover:bg-green-700 rounded-full pl-3 pr-3 pt-1 pb-1"
-      ><a routerLink="/add-service">Add Service</a></span
+      >Add Service</span
     >
     <span
+      routerLink="/job-requests"
       class="cursor-pointer text-center hover:text-white hover:bg-green-700 rounded-full pl-3 pr-3 pt-1 pb-1"
-      ><a routerLink="/job-requests">Job Requests</a></span
+      >Job Requests</span
     >
-    <div class="mt-2 bg-green-700 rounded-full text-center md:bg-transparent">
+    <span
+      routerLink="/services"
+      class="cursor-pointer text-center hover:text-white hover:bg-green-700 rounded-full pl-3 pr-3 pt-1 pb-1"
+      >All Services</span
+    >
+    <div class="mt-1 md:mt-3 lg:mt-1 bg-green-700 rounded-full text-center md:bg-transparent">
       <app-logout />
     </div>
   </div>
