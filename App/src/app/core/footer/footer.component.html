@@ -5,7 +5,7 @@
     class="flex flex-col-reverse items-center justify-between space-y-12 md:flex-col md:sace-y-0 md:items-start"
   >
     <div>
-      <a routerLink="/home"
+      <a routerLink="/home" (click)="onActive()"
         ><img
           src="../../../assets/images/logo-PhotoRoom.png-PhotoRoom.png"
           class="h-24"
@@ -26,26 +26,48 @@
   </div>
   <div class="flex justify-center space-x-32 items-center">
     <div class="flex flex-col space-y-3 items-center">
-      <a routerLink="/home" class="hover:text-green-700 text-xl">Home</a>
-      <a routerLink="/about" class="hover:text-green-700 text-xl">About</a>
-      <a routerLink="/services" class="hover:text-green-700 text-xl"
+      <a
+        routerLink="/home"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
+        >Home</a
+      >
+      <a
+        routerLink="/about"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
+        >About</a
+      >
+      <a
+        routerLink="/services"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
         >Services</a
       >
     </div>
     <div class="flex flex-col space-y-3 items-center">
-      <a routerLink="/products" class="hover:text-green-700 text-xl"
+      <a
+        routerLink="/products"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
         >Products</a
       >
-      <a routerLink="/our-team" class="hover:text-green-700 text-xl"
+      <a
+        routerLink="/our-team"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
         >Our Team</a
       >
-      <a routerLink="/privacy-policy" class="hover:text-green-700 text-xl"
+      <a
+        routerLink="/privacy-policy"
+        (click)="onActive()"
+        class="hover:text-green-700 text-xl"
         >Privacy Policy</a
       >
     </div>
   </div>
   <div class="flex flex-row items-center">
-    <div class="mx-auto md:block">
+    <div (click)="onActive()" class="mx-auto md:block">
       <app-contacts-button />
     </div>
   </div>
