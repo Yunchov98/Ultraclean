@@ -11,12 +11,14 @@ import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests
 import { AddServiceComponent } from './add-service/add-service.component';
 import { JobRequestsComponent } from './job-requests/job-requests.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
-import { ServiceResolver } from './service-details/service-details.reselover';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { isUserGuard } from './core/guards/is-user.guard';
-import { isAdminGuard } from './core/guards/is-admin.guard';
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { WorkersComponent } from './workers/workers.component';
+
+import { isUserGuard } from './core/guards/is-user.guard';
+import { isAdminGuard } from './core/guards/is-admin.guard';
+
+import { ServiceResolver } from './service-details/service-details.reselover';
 
 const routes: Routes = [
   {
@@ -82,8 +84,8 @@ const routes: Routes = [
   },
   {
     path: 'our-team',
-    component: WorkersComponent
-  }
+    component: WorkersComponent,
+  },
 ];
 
 @NgModule({

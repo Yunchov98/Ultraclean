@@ -2,13 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
 
+import { v4 as uuidv4 } from 'uuid';
 import { Service } from '../interfaces/Service';
 import { ApiService } from '../app-services/api.service';
 import { CleaningRequest } from '../interfaces/Cleaning-request';
 import { AuthService } from '../app-services/auth.service';
-import { User } from '../interfaces/User';
 
 @Component({
   selector: 'app-booking-form',
@@ -76,11 +75,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         currentOrder: this.selectedServices,
         myOrders: this.selectedServices,
       };
-
-      // user.myOrders.push(...this.selectedServices);
-      // user.currentOrder.push(...this.selectedServices);
-
-      console.log(user);
     }
 
     const { name, email, phone, address, city } = bookingForm.value;

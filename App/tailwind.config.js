@@ -7,6 +7,7 @@ module.exports = {
         chelaOne: ['Chela One'],
         staatliches: ['Staatliches'],
         kalam: ['Kalam'],
+        roboto: ['Roboto'],
       },
     },
   },

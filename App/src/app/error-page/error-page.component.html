@@ -4,11 +4,24 @@
   </div>
   <div class="mt-16">
     <h2 class="text-9xl text-gray-800 font-bold flex justify-center">403</h2>
-    <p class="text-3xl text-gray-800 flex justify-center font-bold">Forbidden</p>
+    <p class="text-3xl text-gray-800 flex justify-center font-bold">
+      Forbidden
+    </p>
     <p class="text-xl text-gray-800 flex justify-center">
       Access to this resource on the server is denied!
     </p>
-    <button *ngIf="!isLoggedIn" routerLink="/login" class="block mx-auto mt-20 bg-gray-400 rounded-full pl-4 pr-4 pt-2 pb-2 hover:bg-gray-600 hover:text-white">Log In</button>
-    <button routerLink="/" class="block mx-auto mt-20 bg-gray-400 rounded-full pl-4 pr-4 pt-2 pb-2 hover:bg-gray-600 hover:text-white">Back To Home</button>
+    <button
+      *ngIf="!isLoggedIn"
+      routerLink="/login"
+      class="block mx-auto mt-20 bg-gray-400 rounded-full pl-4 pr-4 pt-2 pb-2 hover:bg-gray-600 hover:text-white"
+    >
+      Log In
+    </button>
+    <button
+      routerLink="/"
+      class="block mx-auto mt-20 bg-gray-400 rounded-full pl-4 pr-4 pt-2 pb-2 hover:bg-gray-600 hover:text-white"
+    >
+      Back To Home
+    </button>
   </div>
 </div>

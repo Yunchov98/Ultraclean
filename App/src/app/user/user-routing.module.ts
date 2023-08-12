@@ -3,11 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { isGuesttGuard } from '../core/guards/is-guest.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { UserResolver } from './user.resolver';
+import { isGuesttGuard } from '../core/guards/is-guest.guard';
 import { isUserGuard } from '../core/guards/is-user.guard';
-import { isAdminGuard } from '../core/guards/is-admin.guard';
 
 const routes: Routes = [
   {

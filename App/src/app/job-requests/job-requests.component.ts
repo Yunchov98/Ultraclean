@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { JobRequest } from '../interfaces/Job-request';
 import { ApiService } from '../app-services/api.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-job-requests',
@@ -16,6 +16,7 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
   requests: JobRequest[] = [];
   subscription$!: Subscription;
   requestSubscription$!: Subscription;
+  rejectSubscription$!: Subscription;
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -62,6 +63,15 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
       });
   }
 
+  rejectHandle(requestId: string) {
+    this.rejectSubscription$ = this.apiService
+      .deleteJobRequest(requestId)
+      .subscribe({
+        next: () => this.router.navigate(['/successfully']),
+        error: (err) => console.log(err),
+      });
+  }
+
   ngOnDestroy(): void {
     if (this.subscription$ !== undefined) {
       this.subscription$.unsubscribe();
@@ -69,6 +79,10 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
 
     if (this.requestSubscription$ !== undefined) {
       this.requestSubscription$.unsubscribe();
+    }
+
+    if (this.rejectSubscription$ !== undefined) {
+      this.rejectSubscription$.unsubscribe();
     }
   }
 }

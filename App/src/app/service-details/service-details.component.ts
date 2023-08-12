@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../app-services/api.service';
-import { Service } from '../interfaces/Service';
+
 import { AuthService } from '../app-services/auth.service';
+import { Service } from '../interfaces/Service';
 
 @Component({
   selector: 'app-service-details',

@@ -34,7 +34,6 @@ export class RegisterComponent {
     this.userService
       .register(email, password)
       .then((data) => {
-        console.log(data);
         data.user
           ?.getIdToken()
           .then((t) => {

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
-import { Service } from '../interfaces/Service';
 import { ApiService } from '../app-services/api.service';
 import { AuthService } from '../app-services/auth.service';
-import { Router } from '@angular/router';
+import { Service } from '../interfaces/Service';
 
 @Component({
   selector: 'app-ultraclean-services',
@@ -57,7 +57,6 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (services: Service[]) => {
           this.ultracleanServices = services;
-          console.log(this.ultracleanServices);
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),

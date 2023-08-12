@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
 import { v4 as uuidv4 } from 'uuid';
 import { ApiService } from '../app-services/api.service';
-import { JobRequest } from '../interfaces/Job-request';
 import { AuthService } from '../app-services/auth.service';
+import { JobRequest } from '../interfaces/Job-request';
 import { User } from '../interfaces/User';
 
 @Component({

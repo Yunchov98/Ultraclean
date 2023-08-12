@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
 import { Service } from '../interfaces/Service';
 import { JobRequest } from '../interfaces/Job-request';
 import { CleaningRequest } from '../interfaces/Cleaning-request';
-import { User } from '../interfaces/User';
 import { AcceptedRequest } from '../interfaces/Accepted-request';
 import { FinishedRequest } from '../interfaces/Finished-request';
 import { RejectedRequest } from '../interfaces/Rejected-request';

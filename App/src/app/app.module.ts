@@ -8,24 +8,26 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
+
+import { environment } from '../environments/environment';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+
+import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { MainComponent } from './main/main.component';
-import { UserModule } from './user/user.module';
 import { UltracleanServicesComponent } from './ultraclean-services/ultraclean-services.component';
 import { JoinUsComponent } from './join-us/join-us.component';
 import { BookingFormComponent } from './booking-form/booking-form.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { CleaningRequestsComponent } from './cleaning-requests/cleaning-requests.component';
 import { AddServiceComponent } from './add-service/add-service.component';
-import { environment } from '../environments/environment';
 import { JobRequestsComponent } from './job-requests/job-requests.component';
 import { ServiceDetailsComponent } from './service-details/service-details.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
-import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { WorkersComponent } from './workers/workers.component';
 

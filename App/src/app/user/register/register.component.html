@@ -69,9 +69,7 @@
           required
         />
 
-        <ng-container
-          *ngIf="repeatPasswordInput.touched"
-        >
+        <ng-container *ngIf="repeatPasswordInput.touched">
           <p
             class="text-red-600"
             *ngIf="repeatPasswordInput.errors?.['required']"

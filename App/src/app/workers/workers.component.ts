@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
 import { ApiService } from '../app-services/api.service';
 import { JobRequest } from '../interfaces/Job-request';
 import { AuthService } from '../app-services/auth.service';
 import { User } from '../interfaces/User';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.css'],
 })
-export class WorkersComponent implements OnInit {
+export class WorkersComponent implements OnInit, OnDestroy {
   subscription$!: Subscription;
   releaseSubscription$!: Subscription;
   workers: JobRequest[] = [];
@@ -59,5 +59,15 @@ export class WorkersComponent implements OnInit {
       next: () => this.router.navigate(['/successfully']),
       error: (err) => console.log(err),
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription$ !== undefined) {
+      this.subscription$.unsubscribe();
+    }
+
+    if (this.releaseSubscription$ !== undefined) {
+      this.releaseSubscription$.unsubscribe();
+    }
   }
 }

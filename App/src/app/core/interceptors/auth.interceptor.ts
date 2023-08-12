@@ -6,9 +6,10 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError, tap, throwError } from 'rxjs';
-import { AuthService } from 'src/app/app-services/auth.service';
 import { Router } from '@angular/router';
+import { Observable, catchError, tap, throwError } from 'rxjs';
+
+import { AuthService } from 'src/app/app-services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -27,12 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
     }
-
-    // request = request.clone({
-    //   setHeaders: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
 
     return next.handle(request).pipe(
       tap(() => console.log('succesfully')),

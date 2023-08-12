@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
 
 import { ApiService } from '../app-services/api.service';
 import { CleaningRequest } from '../interfaces/Cleaning-request';
 import { AcceptedRequest } from '../interfaces/Accepted-request';
-import { Router } from '@angular/router';
 import { RejectedRequest } from '../interfaces/Rejected-request';
 
 @Component({
@@ -65,7 +65,6 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
         },
         error: (err) => console.log(err),
       });
-    console.log(id);
   }
 
   rejectRequest(id: string) {

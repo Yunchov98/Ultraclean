@@ -177,7 +177,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.acceptedRequests = acceptedRequestsArr;
 
           this.totalAcceptedRequests = this.acceptedRequests.length;
-          console.log(this.acceptedRequests);
           this.isLoading = false;
         },
         error: (error) => console.log(`Error: ${error}`),

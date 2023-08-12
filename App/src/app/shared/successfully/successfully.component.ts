@@ -10,6 +10,6 @@ export class SuccessfullyComponent {
   constructor(private router: Router) {}
 
   clickHandler() {
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 }
