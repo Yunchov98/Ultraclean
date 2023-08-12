@@ -22,10 +22,18 @@ export class ServiceDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service = this.activeRoute.snapshot.data['service'];
-    
-    this.titleService.setTitle(`${this.service.service} Details`)
+
+    this.titleService.setTitle(`${this.service.service} Details`);
 
     this.isLoading = false;
+  }
+
+  onActive() {
+    window.scroll({
+      top: 90,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
   isAdmin() {

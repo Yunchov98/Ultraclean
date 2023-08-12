@@ -41,12 +41,14 @@
 
         <div *ngIf="!isAdmin()" class="flex justify-center mt-4 space-x-2">
           <button
+            (click)="onActive()"
             [routerLink]="['/service', 'details', service._id]"
             class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >
             Learn More
           </button>
           <button
+            (click)="onActive()"
             routerLink="/booking-form"
             class="border-2 rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >
@@ -56,6 +58,7 @@
 
         <div *ngIf="isAdmin()" class="flex justify-center mt-4 space-x-3">
           <button
+            (click)="onActive()"
             [routerLink]="['/service', 'edit', service._id]"
             class="border-2 btn rounded-full border-black p-2 hover:bg-green-700 hover:text-white"
           >

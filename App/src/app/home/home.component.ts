@@ -15,6 +15,14 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle('Ultraclean');
   }
 
+  onActive() {
+    window.scroll({
+      top: 90,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }

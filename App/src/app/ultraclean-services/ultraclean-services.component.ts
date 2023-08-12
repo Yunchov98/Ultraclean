@@ -42,7 +42,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle('Ultraclean Services')
+    this.titleService.setTitle('Ultraclean Services');
 
     this.subscribe$ = this.apiService
       .getUltracleanServices()
@@ -73,6 +73,12 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           if (confirm('Do you really want to delete this service ?')) {
+            window.scroll({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+
             this.router.navigate(['/uc/successfully']);
           }
         },
@@ -84,9 +90,21 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
     this.isClicked = !this.isClicked;
   }
 
+  onActive() {
+    window.scroll({
+      top: 150,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
   ngOnDestroy(): void {
     if (this.subscribe$ !== undefined) {
       this.subscribe$.unsubscribe();
+    }
+
+    if (this.deleteSubscription$ !== undefined) {
+      this.deleteSubscription$.unsubscribe();
     }
   }
 }

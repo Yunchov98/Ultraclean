@@ -27,7 +27,7 @@ export class EditServiceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.service = this.activeRoute.snapshot.data['service'];
 
-    this.titleService.setTitle(`${this.service.service} Edit`)
+    this.titleService.setTitle(`${this.service.service} Edit`);
 
     this.isLoading = false;
   }
@@ -42,6 +42,14 @@ export class EditServiceComponent implements OnInit, OnDestroy {
           this.router.navigate(['/service', 'details', `${serviceId}`]),
         error: (err) => console.log(err),
       });
+  }
+
+  onActive() {
+    window.scroll({
+      top: 90,
+      left: 0,
+      behavior: 'smooth',
+    });
   }
 
   ngOnDestroy(): void {
