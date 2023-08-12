@@ -65,6 +65,9 @@ Admin Profile:
   8. Contacts View
   ![contacts](https://github.com/Yunchov98/Ultraclean/assets/107936254/203256c4-4a5c-4990-91cf-298ed01afbf0)
 
+  9. Footer View
+  ![footer](https://github.com/Yunchov98/Ultraclean/assets/107936254/f696854b-f4a3-4d2a-8dca-19a4128a3adf)
+
 ### User View
 Users have access to all pages that guests do. Users have access to pages that guests do not.
 
