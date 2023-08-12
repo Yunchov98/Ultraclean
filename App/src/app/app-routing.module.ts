@@ -19,6 +19,7 @@ import { isUserGuard } from './core/guards/is-user.guard';
 import { isAdminGuard } from './core/guards/is-admin.guard';
 
 import { ServiceResolver } from './service-details/service-details.reselover';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,10 @@ const routes: Routes = [
   {
     path: 'our-team',
     component: WorkersComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
 

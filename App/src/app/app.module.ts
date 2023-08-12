@@ -30,6 +30,7 @@ import { ServiceDetailsComponent } from './service-details/service-details.compo
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { WorkersComponent } from './workers/workers.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { WorkersComponent } from './workers/workers.component';
     ErrorPageComponent,
     EditServiceComponent,
     WorkersComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
