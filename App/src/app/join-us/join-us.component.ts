@@ -18,6 +18,7 @@ import { User } from '../interfaces/User';
 export class JoinUsComponent implements OnInit, OnDestroy {
   subscription$!: Subscription;
   workersSubscription$!: Subscription;
+  jobRequestSubscription$!: Subscription;
   isLoading: boolean = true;
   errorMessage: string = '';
   userData!: User | null;
@@ -34,6 +35,32 @@ export class JoinUsComponent implements OnInit, OnDestroy {
     this.userData = this.authService.getUserData();
 
     this.titleService.setTitle('Ultraclean Join Us');
+
+    this.jobRequestSubscription$ = this.apiService.getJobRequests().pipe(
+      map((requests) => {
+        const requestsArr: JobRequest[] = [];
+
+        for (const key in requests) {
+          if (requests.hasOwnProperty(key)) {
+            requestsArr.push({ ...requests[key], _id: key });
+          }
+        }
+
+        return requestsArr;
+      })
+    )
+    .subscribe({
+      next: (requestsArr: JobRequest[]) => {
+        for (const request of requestsArr) {
+          if (request._ownerId === this.userData?._id) {
+            this.errorMessage = 'You are already sent a request!';
+            this.isDisabled = true;
+            return;
+          }
+        }
+      },
+      error: (error) => console.log(`Error: ${error}`),
+    });
 
     this.workersSubscription$ = this.apiService
       .getWorkers()

@@ -60,7 +60,7 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
           this.apiService.acceptRequest(this.acceptedRequest).subscribe({
             next: () =>
               this.apiService.deleteCleaningRequest(id).subscribe({
-                next: () => this.router.navigate(['/profile']),
+                next: () => this.router.navigate(['/user/profile']),
                 error: (err) => console.log(err),
               }),
             error: (err) => console.log(err),
@@ -80,7 +80,7 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
           this.apiService.addRejectedRequest(this.rejectedRequest).subscribe({
             next: () =>
               this.apiService.deleteCleaningRequest(id).subscribe({
-                next: () => this.router.navigate(['/profile']),
+                next: () => this.router.navigate(['/user/profile']),
                 error: (err) => console.log(err),
               }),
             error: (err) => console.log(err),

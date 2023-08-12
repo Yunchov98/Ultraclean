@@ -46,13 +46,17 @@
           #imageInput="ngModel"
           required
           minlength="6"
+          pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
         />
 
         <ng-container *ngIf="imageInput.touched">
-          <p class="text-red-600" *ngIf="serviceInput.errors?.['required']">
+          <p class="text-red-600" *ngIf="imageInput.errors?.['pattern']">
+            Invalid URL!
+          </p>
+          <p class="text-red-600" *ngIf="imageInput.errors?.['required']">
             Image URL is required!
           </p>
-          <p class="text-red-600" *ngIf="serviceInput.errors?.['minlength']">
+          <p class="text-red-600" *ngIf="imageInput.errors?.['minlength']">
             Image URL must be at least 4 characters long.
           </p>
         </ng-container>
@@ -94,10 +98,10 @@
         ></textarea>
 
         <ng-container *ngIf="descriptionArea.touched">
-          <p class="text-red-600" *ngIf="serviceInput.errors?.['required']">
+          <p class="text-red-600" *ngIf="descriptionArea.errors?.['required']">
             Description is required!
           </p>
-          <p class="text-red-600" *ngIf="serviceInput.errors?.['minlength']">
+          <p class="text-red-600" *ngIf="descriptionArea.errors?.['minlength']">
             Description must be at least 10 characters long.
           </p>
         </ng-container>

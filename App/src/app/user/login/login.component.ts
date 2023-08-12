@@ -22,11 +22,11 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
-    private title: Title
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Ultraclean Login');
+    this.titleService.setTitle('Ultraclean Login');
   }
 
   loginHandler(loginForm: NgForm): void {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
           })
           .catch((err) => console.log(err));
 
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       })
       .catch(() => (this.errorMessage = 'Wrong email or password!'));
   }
