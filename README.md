@@ -34,7 +34,7 @@ This application is deployed via firebase
 
 Admin Profile:
 
-1.Emal: admin@admin.com
+1.Email: admin@admin.com
   - password: 12345678
 ## These accounts are not real. They are for testing purposes!
 
