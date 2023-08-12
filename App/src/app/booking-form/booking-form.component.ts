@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription, map } from 'rxjs';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -27,10 +28,13 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Booking Form')
+
     this.subscription$ = this.apiService
       .getUltracleanServices()
       .pipe(
@@ -93,7 +97,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     };
 
     this.subscription$ = this.apiService.bookAService(this.request).subscribe({
-      next: () => this.router.navigate(['/successfully']),
+      next: () => this.router.navigate(['/uc/successfully']),
       error: (error) => console.log(error),
     });
   }

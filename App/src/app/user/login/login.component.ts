@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from 'src/app/app-services/auth.service';
 import { UserService } from 'src/app/app-services/user.service';
@@ -11,7 +12,7 @@ import { User } from '../../interfaces/User';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   errorMessage!: string;
   token: string = '';
   userData!: User;
@@ -20,8 +21,13 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {}
+
+  ngOnInit(): void {
+    this.title.setTitle('Ultraclean Login');
+  }
 
   loginHandler(loginForm: NgForm): void {
     const { email, password } = loginForm.value;

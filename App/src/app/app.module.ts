@@ -31,6 +31,8 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { EditServiceComponent } from './edit-service/edit-service.component';
 import { WorkersComponent } from './workers/workers.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     EditServiceComponent,
     WorkersComponent,
     NotFoundComponent,
+    PrivacyPolicyComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,

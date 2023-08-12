@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -18,9 +19,15 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
   requestSubscription$!: Subscription;
   rejectSubscription$!: Subscription;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Job Requests');
+
     this.subscription$ = this.apiService
       .getJobRequests()
       .pipe(
@@ -52,7 +59,7 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
           this.apiService.addWorker(request).subscribe({
             next: () => {
               this.apiService.deleteJobRequest(requestId).subscribe({
-                next: () => this.router.navigate(['/successfully']),
+                next: () => this.router.navigate(['/uc/successfully']),
                 error: (err) => console.log(err),
               });
             },
@@ -67,7 +74,7 @@ export class JobRequestsComponent implements OnInit, OnDestroy {
     this.rejectSubscription$ = this.apiService
       .deleteJobRequest(requestId)
       .subscribe({
-        next: () => this.router.navigate(['/successfully']),
+        next: () => this.router.navigate(['/uc/successfully']),
         error: (err) => console.log(err),
       });
   }

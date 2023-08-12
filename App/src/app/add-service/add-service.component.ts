@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { ApiService } from '../app-services/api.service';
@@ -21,10 +22,13 @@ export class AddServiceComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Add-Service')
+
     this.isLoading = false;
   }
 
@@ -50,7 +54,7 @@ export class AddServiceComponent implements OnInit, OnDestroy {
     };
 
     this.subscription$ = this.apiService.createService(serviceData).subscribe({
-      next: () => this.router.navigate(['/successfully']),
+      next: () => this.router.navigate(['/uc/successfully']),
       error: (error) => (this.errorMessage = error.message),
     });
   }

@@ -30,7 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request).pipe(
-      tap(() => console.log('succesfully')),
+      tap(() => console.log('successfully')),
       catchError((error: HttpErrorResponse) => {
         console.log('Error:', error);
         if (error.status === 401) {

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription, map } from 'rxjs';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -25,11 +26,14 @@ export class JoinUsComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
+
+    this.titleService.setTitle('Ultraclean Join Us');
 
     this.workersSubscription$ = this.apiService
       .getWorkers()
@@ -103,7 +107,7 @@ export class JoinUsComponent implements OnInit, OnDestroy {
       this.subscription$ = this.apiService
         .sendJobRequest(jobRequest)
         .subscribe({
-          next: () => this.router.navigate(['/successfully']),
+          next: () => this.router.navigate(['/uc/successfully']),
           error: (err) => console.log(err),
         });
     }

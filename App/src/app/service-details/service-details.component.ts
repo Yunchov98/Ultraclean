@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../app-services/auth.service';
 import { Service } from '../interfaces/Service';
@@ -15,11 +16,14 @@ export class ServiceDetailsComponent implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.service = this.activeRoute.snapshot.data['service'];
+    
+    this.titleService.setTitle(`${this.service.service} Details`)
 
     this.isLoading = false;
   }

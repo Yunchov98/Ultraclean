@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from 'src/app/app-services/auth.service';
 import { UserService } from 'src/app/app-services/user.service';
@@ -11,7 +12,7 @@ import { User } from 'src/app/interfaces/User';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   errorMessage: string = '';
   userData!: User;
   emailErrorMessage: string = '';
@@ -21,8 +22,13 @@ export class RegisterComponent {
   constructor(
     private userService: UserService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private titleService: Title
   ) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Register');
+  }
 
   registerHandler(registerForm: NgForm) {
     if (registerForm.invalid) {
@@ -49,7 +55,7 @@ export class RegisterComponent {
             this.authService.setUserData(this.userData);
 
             this.userService.addUser(this.userData).subscribe({
-              next: () => this.router.navigate(['/successfully']),
+              next: () => this.router.navigate(['/uc/successfully']),
               error: (err) => console.log(err),
             });
           })

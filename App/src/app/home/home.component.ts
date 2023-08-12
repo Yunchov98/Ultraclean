@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../app-services/auth.service';
 
@@ -7,8 +8,12 @@ import { AuthService } from '../app-services/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  constructor(private authService: AuthService) {}
+export class HomeComponent implements OnInit {
+  constructor(private authService: AuthService, private titleService: Title) {}
+
+  ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean');
+  }
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;

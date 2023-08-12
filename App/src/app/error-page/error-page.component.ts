@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../app-services/auth.service';
 
@@ -10,9 +11,11 @@ import { AuthService } from '../app-services/auth.service';
 export class ErrorPageComponent implements OnInit {
   isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Error Page');
+
     this.isLoggedIn = this.authService.isLoggedIn;
   }
 }

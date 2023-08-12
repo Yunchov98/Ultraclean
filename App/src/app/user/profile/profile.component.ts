@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 import { ApiService } from 'src/app/app-services/api.service';
 import { AuthService } from 'src/app/app-services/auth.service';
@@ -41,7 +42,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +52,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     } else {
       this.userView();
     }
+
+    this.titleService.setTitle('Profile')
 
     this.finishedRequestsSubscription$ = this.apiService
       .getFinishedRequests()
@@ -193,7 +197,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.apiService.addFinishedRequest(this.finishedRequest).subscribe({
             next: () =>
               this.apiService.deleteAcceptedRequest(id).subscribe({
-                next: () => this.router.navigate(['/successfully']),
+                next: () => this.router.navigate(['/uc/successfully']),
                 error: (err) => console.log(err),
               }),
             error: (err) => console.log(err),

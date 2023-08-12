@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 import { ApiService } from '../app-services/api.service';
 import { JobRequest } from '../interfaces/Job-request';
@@ -23,11 +24,14 @@ export class WorkersComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.userData = this.authService.getUserData();
+
+    this.titleService.setTitle('Our Employees')
 
     this.subscription$ = this.apiService
       .getWorkers()
@@ -56,7 +60,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
 
   releaseHandle(id: string) {
     this.releaseSubscription$ = this.apiService.deleteWorker(id).subscribe({
-      next: () => this.router.navigate(['/successfully']),
+      next: () => this.router.navigate(['/uc/successfully']),
       error: (err) => console.log(err),
     });
   }

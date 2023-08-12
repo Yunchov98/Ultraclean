@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription, map } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 import { ApiService } from '../app-services/api.service';
 import { AuthService } from '../app-services/auth.service';
@@ -23,7 +24,8 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
   constructor(
     private apiService: ApiService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   isAdmin(): boolean {
@@ -40,6 +42,8 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Services')
+
     this.subscribe$ = this.apiService
       .getUltracleanServices()
       .pipe(
@@ -69,7 +73,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           if (confirm('Do you really want to delete this service ?')) {
-            this.router.navigate(['/successfully']);
+            this.router.navigate(['/uc/successfully']);
           }
         },
         error: (err) => console.log(err),

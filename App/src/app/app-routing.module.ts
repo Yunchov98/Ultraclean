@@ -20,6 +20,8 @@ import { isAdminGuard } from './core/guards/is-admin.guard';
 
 import { ServiceResolver } from './service-details/service-details.reselover';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
@@ -86,6 +88,23 @@ const routes: Routes = [
   {
     path: 'our-team',
     component: WorkersComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'uc',
+    loadChildren: () =>
+      import('./shared/shared.module').then((m) => m.SharedModule),
   },
   {
     path: '**',

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Subscription, map } from 'rxjs';
 
 import { ApiService } from '../app-services/api.service';
@@ -21,9 +22,11 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
   acceptedRequest!: AcceptedRequest;
   rejectedRequest!: RejectedRequest;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router, private titleService: Title) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Ultraclean Cleaning Requests')
+
     this.subscription$ = this.apiService
       .getCleaningRequests()
       .pipe(

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { Service } from '../interfaces/Service';
@@ -19,11 +20,14 @@ export class EditServiceComponent implements OnInit, OnDestroy {
   constructor(
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
     this.service = this.activeRoute.snapshot.data['service'];
+
+    this.titleService.setTitle(`${this.service.service} Edit`)
 
     this.isLoading = false;
   }
