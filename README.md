@@ -22,6 +22,8 @@ This application is deployed via firebase
 ### You can access it here -> https://ultraclean-1f04b.web.app/home
 - You can view it as a guest or you can register.
 - If you don't want to register you can check it out with one of the following profiles:
+
+As a user, you can book a service or apply for a job. Also once you make a correct service request you can view it in your profile.
   
 1.Email: peter@abv.bg
   - password: 12345678
@@ -33,6 +35,8 @@ This application is deployed via firebase
   - password: 12345678
 
 Admin Profile:
+
+As an admin you can view and approve or deny a cleanup request. You can view and accept or decline a job request. Once you accept a cleaning request, it will be displayed in your profile in the Accepted Orders section. When you click the Done button on an accepted order, it will be sent to the Finished Orders section where all the orders you have completed are. You can also add new services or adjust old ones. As an admin you can release an employee by logging into Our Team, which is located in the footer and clicking the release button.
 
 1.Email: admin@admin.com
   - password: 12345678
