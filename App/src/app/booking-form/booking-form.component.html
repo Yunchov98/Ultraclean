@@ -151,9 +151,6 @@
           clearAllText="Clear All"
           (change)="sumTotalPrice()"
         >
-          <!-- <ng-option *ngFor="let service of services" [value]="service._id">{{
-            service.service
-          }} </ng-option> -->
         </ng-select>
         <ng-container *ngIf="select.touched">
           <p class="text-red-600" *ngIf="select.errors?.['required']">

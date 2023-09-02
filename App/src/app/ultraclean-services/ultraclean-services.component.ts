@@ -32,8 +32,7 @@ export class UltracleanServicesComponent implements OnInit, OnDestroy {
     if (
       this.authService
         .getUserData()
-        ?.email?.toLowerCase()
-        .includes('@admin.com')
+        ?.isAdmin
     ) {
       return true;
     }

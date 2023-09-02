@@ -94,5 +94,13 @@ export class CleaningRequestsComponent implements OnInit, OnDestroy {
     if (this.subscription$ !== undefined) {
       this.subscription$.unsubscribe();
     }
+
+    if(this.acceptRequestSubscription$ !== undefined) {
+      this.acceptRequestSubscription$.unsubscribe();
+    }
+
+    if(this.rejectRequestSubscription$ !== undefined) {
+      this.rejectRequestSubscription$.unsubscribe();
+    }
   }
 }
